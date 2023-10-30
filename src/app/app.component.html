@@ -1,9 +1,13 @@
-<mat-toolbar>
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+<mat-toolbar color="primary">
+  <button (click)="opened=!opened" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
     <mat-icon>menu</mat-icon>
   </button>
   <span>Dating project</span>
-
 </mat-toolbar>
+
+<mat-drawer-container>
+  <mat-drawer mode="side" [(opened)]="opened">Drawer content</mat-drawer>
+  <mat-drawer-content>Main content</mat-drawer-content>
+</mat-drawer-container>
 
 <router-outlet></router-outlet>
