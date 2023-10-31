@@ -1,6 +1,6 @@
 export interface AssignmentDTO {
   id: number;
-  nombre:string;
-  description: string;
+  nombre: string;
+  descripcion: string;
   precio: number;
- }
+}
