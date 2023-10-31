@@ -5,9 +5,17 @@
   <span>Dating project</span>
 </mat-toolbar>
 
-<mat-drawer-container>
-  <mat-drawer mode="side" [(opened)]="opened">Drawer content</mat-drawer>
-  <mat-drawer-content>Main content</mat-drawer-content>
-</mat-drawer-container>
+<mat-sidenav-container>
 
-<router-outlet></router-outlet>
+  <mat-sidenav [(opened)]="opened" mode="side">
+    <mat-list>
+      <mat-list-item><a routerLink="#">Home</a></mat-list-item>
+      <mat-list-item><a routerLink="#">Register</a></mat-list-item>
+    </mat-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>

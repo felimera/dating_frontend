@@ -1,9 +1,18 @@
-mat-drawer-container {
+mat-sidenav-container {
   width: 100%;
   height: 100%;
   margin: 10px;
 }
 
-mat-drawer {
+mat-sidenav {
   width: 200px;
+}
+
+mat-list-item a {
+  text-decoration: none;
+}
+
+mat-list-item :hover {
+  padding: 15px;
+  background-color: rgb(189, 189, 244);
 }
