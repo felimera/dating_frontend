@@ -1,10 +1,14 @@
-<p>list-assignment works!</p>
-
-<h2>Lista de tareas</h2>
-<ul>
-  <li *ngFor="let assignment of assignments">
-    <p><span>Nombre : </span>{{ assignment.nombre }}</p>
-    <p><span>Descricion : </span>{{ assignment.descripcion }}</p>
-    <p><span>Precion : </span>{{ assignment.precio }}</p>
-  </li>
-</ul>
+<div class="container responsive-grid">
+  <mat-card *ngFor="let assignment of assignments">
+    <mat-card-header>
+      <mat-card-title>{{assignment.nombre}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p class="text-content">Descripcion : <span>{{assignment.descripcion}}</span></p>
+      <p class="text-content">Precio : <span>{{assignment.precio}}</span></p>
+    </mat-card-content>
+    <mat-card-actions class="card-button">
+      <button>Agregar</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
