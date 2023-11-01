@@ -14,11 +14,13 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatCardModule } from '@angular/material/card';
+import { UserLoginComponent } from './modules/user/component/user-login/user-login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ListAssignmentComponent
+    ListAssignmentComponent,
+    UserLoginComponent
   ],
   imports: [
     BrowserModule,
