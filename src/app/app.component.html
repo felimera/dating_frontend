@@ -1,3 +1,23 @@
-<app-list-assignment></app-list-assignment>
+<mat-toolbar color="primary">
+  <button (click)="opened=!opened" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>Dating project</span>
+</mat-toolbar>
 
-<router-outlet></router-outlet>
+<mat-sidenav-container>
+
+  <mat-sidenav [(opened)]="opened" mode="side">
+    <mat-list>
+      <mat-list-item><a routerLink="#">Home</a></mat-list-item>
+      <mat-list-item><a routerLink="#">Register</a></mat-list-item>
+    </mat-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>
+
+<app-list-assignment></app-list-assignment>
