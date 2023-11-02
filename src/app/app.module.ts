@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { ListAssignmentComponent } from './modules/assignment/component/list-assignment/list-assignment.component';
+import { UserLoginComponent } from './modules/user/component/user-login/user-login.component';
 
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -14,7 +15,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatCardModule } from '@angular/material/card';
-import { UserLoginComponent } from './modules/user/component/user-login/user-login.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -33,7 +36,10 @@ import { UserLoginComponent } from './modules/user/component/user-login/user-log
     MatSidenavModule,
     MatListModule,
     MatExpansionModule,
-    MatCardModule
+    MatCardModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatFormFieldModule
   ],
   providers: [],
   bootstrap: [AppComponent]
