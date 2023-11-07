@@ -1,0 +1,16 @@
+.container {
+  padding: 1rem;
+  text-align: center;
+}
+
+.container mat-form-field {
+  margin: auto;
+  display: grid;
+  width: 700px;
+  margin-top: 5px;
+  padding-top: 5px;
+}
+
+.btn-guardar {
+  margin-right: 10px;
+}
