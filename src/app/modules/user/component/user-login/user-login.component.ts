@@ -37,4 +37,8 @@ export class UserLoginComponent implements OnInit {
       this.router.navigateByUrl('/');
     }, error => console.error('error', error));
   }
+
+  onCreater(): void {
+    this.router.navigateByUrl('/user-create');
+  }
 }
