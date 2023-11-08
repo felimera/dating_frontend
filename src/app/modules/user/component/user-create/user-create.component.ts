@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UserSignupService } from 'src/app/infrastructure/services/user-signup.service';
+import { DatePipe } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-create',
@@ -8,8 +11,12 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class UserCreateComponent implements OnInit {
   userForm!: FormGroup;
-
   hide = true;
+
+  constructor(private userSignupService: UserSignupService, private router: Router) { }
+
+  pipe = new DatePipe('en-US');
+
   ngOnInit(): void {
     this.userForm = new FormGroup({
       nombres: new FormControl(''),
@@ -50,9 +57,15 @@ export class UserCreateComponent implements OnInit {
 
   onCreater(): void {
     const nombres = this.userForm.get('firt_name')?.value + '&' + this.userForm.get('last_name')?.value;
+    const fechaFormateada = this.pipe.transform(this.userForm.get('fechaNacimiento')?.value, 'dd/MM/yyyy');
     this.userForm.get('nombres')?.setValue(nombres);
     this.userForm.get('rol')?.setValue('U');
+    this.userForm.get('fechaNacimiento')?.setValue(fechaFormateada);
 
-    console.log('this.userForm.value', this.userForm.value);
+    this.userSignupService
+      .createUser(this.userForm.value)
+      .subscribe((res: any) => {
+        this.router.navigateByUrl('/login');
+      }, error => console.log('error', error));
   }
 }
