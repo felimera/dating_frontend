@@ -1,59 +1,71 @@
 <div>
-  <form>
-<div class="container">
-    <mat-form-field hintLabel="Max 49 characters">
-      <mat-label>Nombres</mat-label>
-      <input matInput #input maxlength="49" placeholder="Registra tus nombres. Ej: Julian Andres">
-      <mat-hint align="end">{{input.value.length}}/50</mat-hint>
-    </mat-form-field>
+  <form [formGroup]="userForm">
+    <div class="container">
+      <mat-form-field hintLabel="Max 49 characters">
+        <mat-label>Nombres</mat-label>
+        <input matInput #input maxlength="49" placeholder="Registra tus nombres. Ej: Julian Andres"
+          formControlName="firt_name">
+        <mat-hint align="end">{{input.value.length}}/50</mat-hint>
+      </mat-form-field>
 
-    <mat-form-field hintLabel="Max 49 characters">
-      <mat-label>Apellidos</mat-label>
-      <input matInput #input maxlength="49" placeholder="Registra tus apellidos. Ej: Gomez Perez">
-      <mat-hint align="end">{{input.value.length}}/50</mat-hint>
-    </mat-form-field>
+      <mat-form-field hintLabel="Max 49 characters">
+        <mat-label>Apellidos</mat-label>
+        <input matInput #input maxlength="49" placeholder="Registra tus apellidos. Ej: Gomez Perez"
+          formControlName="last_name">
+        <mat-hint align="end">{{input.value.length}}/50</mat-hint>
+      </mat-form-field>
 
-    <mat-form-field>
-      <mat-label>Selecciona tu genero</mat-label>
-      <mat-select>
-        <mat-option value="M">Masculino</mat-option>
-        <mat-option value="F">Femenino</mat-option>
-      </mat-select>
-      <mat-hint align="end">Aquí está la flecha desplegable ^</mat-hint>
-    </mat-form-field>
+      <mat-form-field>
+        <mat-label>Selecciona tu genero</mat-label>
+        <mat-select formControlName="genero">
+          <mat-option value="M">Masculino</mat-option>
+          <mat-option value="F">Femenino</mat-option>
+        </mat-select>
+        <mat-hint align="end">Aquí está la flecha desplegable ^</mat-hint>
+      </mat-form-field>
 
-    <mat-form-field>
-      <mat-label>Fecha de Nacimiento</mat-label>
-      <input matInput [matDatepicker]="picker">
-      <mat-hint>MM/DD/YYYY</mat-hint>
-      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
+      <mat-form-field>
+        <mat-label>Fecha de Nacimiento</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="fechaNacimiento">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
 
-    <mat-form-field>
-      <mat-label>Enter your email</mat-label>
-      <input matInput placeholder="pat@example.com" [formControl]="email" required>
-      <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
-    </mat-form-field>
+      <mat-form-field>
+        <mat-label>Enter your email</mat-label>
+        <input matInput placeholder="pat@example.com" formControlName="email" required>
+        <mat-error *ngIf="userForm.invalid">{{getErrorMessage()}}</mat-error>
+        <mat-icon matSuffix fontIcon="mail"></mat-icon>
+      </mat-form-field>
 
-    <mat-form-field>
-      <mat-label>Ingresa la contraseña</mat-label>
-      <input matInput [type]="hide ? 'password' : 'text'">
-      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-      </button>
-    </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Telefono celular</mat-label>
+        <span matPrefix>+57 &nbsp;</span>
+        <input type="number" matInput placeholder="555-555-1234" formControlName="telefono">
+        <mat-icon matSuffix fontIcon="call"></mat-icon>
+      </mat-form-field>
 
-    <mat-form-field>
-      <mat-label>Vuelve a ingresar la contraseña</mat-label>
-      <input matInput [type]="hide ? 'password' : 'text'">
-      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-      </button>
-    </mat-form-field>
+      <mat-form-field>
+        <mat-label>Ingresa la contraseña</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
 
-    <button mat-raised-button class="btn-guardar" color="primary">Guardar</button>
-    <button mat-raised-button class="btn-guardar" color="warn">Cancelar</button>
-  </div>
+      <mat-form-field>
+        <mat-label>Vuelve a ingresar la contraseña</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" formControlName="verify_password">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <button mat-raised-button class="btn-guardar" color="primary" (click)="onCreater()">Guardar</button>
+      <button mat-raised-button class="btn-guardar" color="warn">Cancelar</button>
+    </div>
   </form>
 </div>
