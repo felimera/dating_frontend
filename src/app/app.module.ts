@@ -23,13 +23,15 @@ import { UserCreateComponent } from './modules/user/component/user-create/user-c
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
+import { AppointmentCreateComponent } from './modules/appointment/component/appointment-create/appointment-create.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ListAssignmentComponent,
     UserLoginComponent,
-    UserCreateComponent
+    UserCreateComponent,
+    AppointmentCreateComponent
   ],
   imports: [
     BrowserModule,
