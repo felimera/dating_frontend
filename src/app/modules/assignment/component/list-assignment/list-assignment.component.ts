@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Assignment } from 'src/app/core/models/assignment.model';
 import { AssignmentRepositoryImpl } from 'src/app/infrastructure/repositories/assignment.repository.impl';
 
@@ -11,7 +12,10 @@ export class ListAssignmentComponent implements OnInit {
 
   assignments: Assignment[] = [];
 
-  constructor(private assignmentRepositoryImpl: AssignmentRepositoryImpl) { }
+  constructor(
+    private assignmentRepositoryImpl: AssignmentRepositoryImpl,
+    private router:Router
+    ) { }
 
   ngOnInit() {
     this.loadAssignment();
@@ -24,4 +28,7 @@ export class ListAssignmentComponent implements OnInit {
     });
   }
 
+  onAddAppointment():void {
+    this.router.navigateByUrl('/appointment-create');
+  }
 }
