@@ -14,8 +14,8 @@ export class ListAssignmentComponent implements OnInit {
 
   constructor(
     private assignmentRepositoryImpl: AssignmentRepositoryImpl,
-    private router:Router
-    ) { }
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.loadAssignment();
@@ -28,7 +28,7 @@ export class ListAssignmentComponent implements OnInit {
     });
   }
 
-  onAddAppointment():void {
+  onAddAppointment(): void {
     this.router.navigateByUrl('/appointment-create');
   }
 }

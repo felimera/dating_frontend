@@ -7,6 +7,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { ListAssignmentComponent } from './modules/assignment/component/list-assignment/list-assignment.component';
 import { UserLoginComponent } from './modules/user/component/user-login/user-login.component';
+import { UserCreateComponent } from './modules/user/component/user-create/user-create.component';
+import { AppointmentCreateComponent } from './modules/appointment/component/appointment-create/appointment-create.component';
 
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -18,12 +20,15 @@ import { MatCardModule } from '@angular/material/card';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { UserCreateComponent } from './modules/user/component/user-create/user-create.component';
 
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
-import { AppointmentCreateComponent } from './modules/appointment/component/appointment-create/appointment-create.component';
+import { MatGridListModule } from '@angular/material/grid-list';
+
+import { MatDividerModule } from '@angular/material/divider';
+import { CurrencyPipe } from '@angular/common';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -50,7 +55,11 @@ import { AppointmentCreateComponent } from './modules/appointment/component/appo
     MatFormFieldModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatSelectModule
+    MatSelectModule,
+    MatGridListModule,
+    MatDividerModule,
+    CurrencyPipe,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
