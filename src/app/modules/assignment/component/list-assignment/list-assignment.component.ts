@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Assignment } from 'src/app/core/models/assignment.model';
 import { AssignmentRepositoryImpl } from 'src/app/infrastructure/repositories/assignment.repository.impl';
+import { DialogElementsDialogComponent } from 'src/app/modules/component/dialog-elements-dialog/dialog-elements-dialog.component';
 
 @Component({
   selector: 'app-list-assignment',
@@ -12,9 +14,12 @@ export class ListAssignmentComponent implements OnInit {
 
   assignments: Assignment[] = [];
 
+  valid: boolean | any;
+
   constructor(
     private assignmentRepositoryImpl: AssignmentRepositoryImpl,
-    private router: Router
+    private router: Router,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -29,6 +34,18 @@ export class ListAssignmentComponent implements OnInit {
   }
 
   onAddAppointment(): void {
-    this.router.navigateByUrl('/appointment-create');
+    if (localStorage.getItem('TOKEN')) {
+      this.router.navigateByUrl('/appointment-create');
+    } else {
+      const dialogRef = this.dialog.open(DialogElementsDialogComponent, {
+        data: { valid: this.valid },
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        this.valid = result.valid
+        if (this.valid)
+          this.router.navigateByUrl('/login');
+      });
+    }
   }
 }

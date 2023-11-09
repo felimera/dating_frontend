@@ -5,10 +5,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+
 import { ListAssignmentComponent } from './modules/assignment/component/list-assignment/list-assignment.component';
 import { UserLoginComponent } from './modules/user/component/user-login/user-login.component';
 import { UserCreateComponent } from './modules/user/component/user-create/user-create.component';
 import { AppointmentCreateComponent } from './modules/appointment/component/appointment-create/appointment-create.component';
+import { DialogElementsDialogComponent } from './modules/component/dialog-elements-dialog/dialog-elements-dialog.component';
 
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -29,6 +31,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatDividerModule } from '@angular/material/divider';
 import { CurrencyPipe } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -36,7 +39,8 @@ import { MatTableModule } from '@angular/material/table';
     ListAssignmentComponent,
     UserLoginComponent,
     UserCreateComponent,
-    AppointmentCreateComponent
+    AppointmentCreateComponent,
+    DialogElementsDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +63,8 @@ import { MatTableModule } from '@angular/material/table';
     MatGridListModule,
     MatDividerModule,
     CurrencyPipe,
-    MatTableModule
+    MatTableModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
