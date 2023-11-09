@@ -1,4 +1,4 @@
-<form>
+<form [formGroup]="appointmentForm">
   <div class="container-row">
 
     <div>
@@ -11,7 +11,7 @@
       <mat-list>
         <mat-list-item>Elige la hora de la cita</mat-list-item>
         <mat-list-item>
-          <input id="appt-time" type="time" matInput name="appt-time" />
+          <input id="appt-time" type="time" matInput name="appt-time" formControlName="hora" />
         </mat-list-item>
         <mat-divider></mat-divider>
         <mat-list-item>Nombre : Daniela Gomez </mat-list-item>
@@ -19,11 +19,12 @@
         <mat-list-item>Telefono y correo : 31245123 daniela.daniela.com </mat-list-item>
         <mat-divider></mat-divider>
         <mat-list-item>Fecha de la Cita : 12/12/2023</mat-list-item>
-        <mat-divider></mat-divider>
-        <mat-list-item>Servicios solicitados</mat-list-item>
       </mat-list>
     </div>
 
+  </div>
+  <div class="down-container">
+    <mat-label>Servicios seleccionados</mat-label>
   </div>
   <div class="down-container">
     <table mat-table [dataSource]="transactions" class="mat-elevation-z8">
@@ -37,7 +38,7 @@
       <ng-container matColumnDef="cost">
         <th mat-header-cell *matHeaderCellDef> Cost </th>
         <td mat-cell *matCellDef="let transaction"> {{transaction.cost | currency}} </td>
-        <td mat-footer-cell *matFooterCellDef> {{getTotalCost() | currency}} </td>
+        <td mat-footer-cell *matFooterCellDef> {{priceTotal | currency}} </td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -47,7 +48,7 @@
   </div>
   <div class="example-button-row">
     <div id="btn-rigth">
-      <button mat-raised-button color="primary">Aceptar</button>
+      <button mat-raised-button color="primary" (click)="onCreater()">Aceptar</button>
     </div>
     <div id="btn-left">
       <button mat-raised-button color="warn">Cancelar</button>
