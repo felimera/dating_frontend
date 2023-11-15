@@ -64,8 +64,9 @@ export class UserCreateComponent implements OnInit {
 
     this.userSignupService
       .createUser(this.userForm.value)
-      .subscribe((res: any) => {
-        this.router.navigateByUrl('/login');
-      }, error => console.log('error', error));
+      .subscribe({
+        next: (res: any) => { this.router.navigateByUrl('/login'); }
+        , error: (error) => console.log('error', error)
+      });
   }
 }

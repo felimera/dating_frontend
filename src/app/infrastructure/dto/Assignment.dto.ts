@@ -3,4 +3,5 @@ export interface AssignmentDTO {
   nombre: string;
   descripcion: string;
   precio: number;
+  posicion: number;
 }

@@ -13,4 +13,12 @@ export class AssignmentRepositoryImpl implements AssignmentRepository {
   getAll(): Observable<Assignment[]> {
     return this.assignmentService.getAll();
   }
+
+  getById(id: number): Observable<Assignment> {
+    return this.assignmentService.getById(id);
+  }
+
+  getByListIds(ids: string): Observable<Assignment[]> {
+    return this.assignmentService.getByListIds(ids);
+  }
 }

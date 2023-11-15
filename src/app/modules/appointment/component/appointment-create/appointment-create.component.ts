@@ -2,11 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DateAdapter } from '@angular/material/core';
 import { DatePipe } from '@angular/common';
-
-interface Transaction {
-  item: string;
-  cost: number;
-}
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { AssignmentService } from 'src/app/infrastructure/services/assignment.service';
+import { AssignmentDTO } from 'src/app/infrastructure/dto/assignment.dto';
 
 @Component({
   selector: 'app-appointment-create',
@@ -22,30 +20,34 @@ export class AppointmentCreateComponent implements OnInit {
 
   priceTotal: number | undefined;
 
-  constructor(private dateAdapter: DateAdapter<Date>) {
+  assingments: AssignmentDTO[] = [];
+  displayedColumns: string[] = ['nombre', 'precio'];
+
+  constructor(
+    private dateAdapter: DateAdapter<Date>,
+    private activatedRoute: ActivatedRoute,
+    private assingmentService: AssignmentService
+  ) {
     this.dateAdapter.setLocale('Es');
   }
 
   ngOnInit(): void {
 
-    this.appointmentForm = new FormGroup(
-      {
-        fecha: new FormControl('', [Validators.required]),
-        hora: new FormControl('', [Validators.required]),
-        precioTotal: new FormControl('', [Validators.required]),
-        idCustomer: new FormControl('', [Validators.required]),
-        idsAssignment: new FormControl([''], [Validators.required])
-      }
-    );
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.assingmentService.getByListIds(params['ids']).subscribe(res => {
+        this.assingments = res;
+        this.priceTotal = this.assingments.map(t => t.precio).reduce((acc, value) => value + acc, 0);
+      })
+    });
 
-    this.priceTotal = this.transactions.map(t => t.cost).reduce((acc, value) => acc + value, 0);
+    this.appointmentForm = new FormGroup({
+      fecha: new FormControl('', [Validators.required]),
+      hora: new FormControl('', [Validators.required]),
+      precioTotal: new FormControl('', [Validators.required]),
+      idCustomer: new FormControl('', [Validators.required]),
+      idsAssignment: new FormControl([''], [Validators.required])
+    });
   }
-
-  displayedColumns: string[] = ['item', 'cost'];
-  transactions: Transaction[] = [
-    { item: 'Beach ball', cost: 4 },
-    { item: 'Swim suit', cost: 15 },
-  ];
 
   onCreater(): void {
     const fechaFormateada = this.pipe.transform(this.selected, 'dd/MM/yyyy');

@@ -1,0 +1,23 @@
+#container {
+  width: 700px;
+  height: 400px;
+}
+
+#container mat-card {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+}
+
+#container mat-card mat-card-content {
+  text-align: justify;
+}
+
+#container mat-card mat-card-actions {
+  text-align: center;
+  vertical-align: bottom;
+  height: 20%;
+  width: 95%;
+  bottom: 0px;
+  position: absolute;
+}

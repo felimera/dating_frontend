@@ -8,7 +8,8 @@ export class AssignmentMapper {
       id: apiAssignment.id,
       nombre: apiAssignment.nombre,
       descripcion: apiAssignment.descripcion,
-      precio: apiAssignment.precio
+      precio: apiAssignment.precio,
+      posicion: apiAssignment.posicion
     };
   }
 
@@ -17,7 +18,8 @@ export class AssignmentMapper {
       id: domainAssignment.id,
       nombre: domainAssignment.nombre,
       descripcion: domainAssignment.descripcion,
-      precio: domainAssignment.precio
+      precio: domainAssignment.precio,
+      posicion: domainAssignment.posicion
     };
   }
 }

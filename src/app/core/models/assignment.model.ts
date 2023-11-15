@@ -3,6 +3,7 @@ export class Assignment {
     public id: number,
     public nombre: string,
     public descripcion: string,
-    public precio: number
+    public precio: number,
+    public posicion: number,
   ) { }
 }

@@ -32,10 +32,12 @@ export class UserLoginComponent implements OnInit {
   }
 
   onLogin(): void {
-    this.userLogin.postToken(this.userTokenForm.value).subscribe((res: any) => {
-      localStorage.setItem('TOKEN', res.jwtToken);
-      this.router.navigateByUrl('/home');
-    }, error => console.error('error', error));
+    this.userLogin.postToken(this.userTokenForm.value).subscribe({
+      next: (res: any) => {
+        localStorage.setItem('TOKEN', res.jwtToken);
+        this.router.navigateByUrl('/home');
+      }, error: error => console.error('error', error)
+    });
   }
 
   onCreater(): void {

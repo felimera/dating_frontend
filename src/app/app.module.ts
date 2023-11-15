@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule  } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -32,6 +32,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { CurrencyPipe } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatDividerModule,
     CurrencyPipe,
     MatTableModule,
-    MatDialogModule
+    MatDialogModule,
+    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]

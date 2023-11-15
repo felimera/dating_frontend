@@ -27,17 +27,17 @@
     <mat-label>Servicios seleccionados</mat-label>
   </div>
   <div class="down-container">
-    <table mat-table [dataSource]="transactions" class="mat-elevation-z8">
+    <table mat-table [dataSource]="assingments" class="mat-elevation-z8">
 
-      <ng-container matColumnDef="item">
-        <th mat-header-cell *matHeaderCellDef> Item </th>
-        <td mat-cell *matCellDef="let transaction"> {{transaction.item}} </td>
+      <ng-container matColumnDef="nombre">
+        <th mat-header-cell *matHeaderCellDef> Nombre </th>
+        <td mat-cell *matCellDef="let row"> {{row.nombre}} </td>
         <td mat-footer-cell *matFooterCellDef> Total </td>
       </ng-container>
 
-      <ng-container matColumnDef="cost">
+      <ng-container matColumnDef="precio">
         <th mat-header-cell *matHeaderCellDef> Cost </th>
-        <td mat-cell *matCellDef="let transaction"> {{transaction.cost | currency}} </td>
+        <td mat-cell *matCellDef="let row"> {{row.precio | currency}} </td>
         <td mat-footer-cell *matFooterCellDef> {{priceTotal | currency}} </td>
       </ng-container>
 
