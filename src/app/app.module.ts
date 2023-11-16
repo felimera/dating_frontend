@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { ListAssignmentComponent } from './modules/assignment/component/list-assignment/list-assignment.component';
 import { UserLoginComponent } from './modules/user/component/user-login/user-login.component';
@@ -35,6 +35,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { CookieService } from 'ngx-cookie-service';
+
+import { AppInterceptorService } from './infrastructure/services/app-interceptor.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -69,7 +72,12 @@ import { CookieService } from 'ngx-cookie-service';
     MatDialogModule,
     MatCheckboxModule
   ],
-  providers: [CookieService],
+  providers: [CookieService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AppInterceptorService,
+      multi: true
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
