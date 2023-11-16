@@ -14,11 +14,11 @@
           <input id="appt-time" type="time" matInput name="appt-time" formControlName="hora" />
         </mat-list-item>
         <mat-divider></mat-divider>
-        <mat-list-item>Nombre : Daniela Gomez </mat-list-item>
+        <mat-list-item>Nombre : {{customer.nombre +' '+ customer.apellido}} </mat-list-item>
         <mat-divider></mat-divider>
-        <mat-list-item>Telefono y correo : 31245123 daniela.daniela.com </mat-list-item>
+        <mat-list-item>Telefono y correo : {{customer.telefono}} {{customer.correo}} </mat-list-item>
         <mat-divider></mat-divider>
-        <mat-list-item>Fecha de la Cita : 12/12/2023</mat-list-item>
+        <mat-list-item>Fecha de la Cita : {{fechaCita()}}</mat-list-item>
       </mat-list>
     </div>
 

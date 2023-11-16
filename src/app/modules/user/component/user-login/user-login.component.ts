@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { UserTokenService } from 'src/app/infrastructure/services/user-token.service';
+import { CustomerService } from 'src/app/infrastructure/services/customer.service';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-user-login',
@@ -15,7 +16,12 @@ export class UserLoginComponent implements OnInit {
   userTokenForm!: FormGroup;
   hide = true;
 
-  constructor(private userLogin: UserTokenService, private router: Router) { }
+  constructor(
+    private userLogin: UserTokenService,
+    private router: Router,
+    private customerService: CustomerService,
+    private cookieService: CookieService
+  ) { }
 
   ngOnInit() {
     this.userTokenForm = new FormGroup({
@@ -35,9 +41,21 @@ export class UserLoginComponent implements OnInit {
     this.userLogin.postToken(this.userTokenForm.value).subscribe({
       next: (res: any) => {
         localStorage.setItem('TOKEN', res.jwtToken);
+        this.consultarUsuario();
         this.router.navigateByUrl('/home');
       }, error: error => console.error('error', error)
     });
+  }
+
+  consultarUsuario(): void {
+    this.customerService
+      .getByEmail(this.userTokenForm.get('email')!.value)
+      .subscribe({
+        next: (res: any) => {
+          console.log('res ', res);
+          this.cookieService.set('usuario', JSON.stringify(res));
+        }, error: error => console.error('error', error)
+      })
   }
 
   onCreater(): void {

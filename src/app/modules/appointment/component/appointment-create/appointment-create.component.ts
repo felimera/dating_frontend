@@ -5,6 +5,8 @@ import { DatePipe } from '@angular/common';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { AssignmentService } from 'src/app/infrastructure/services/assignment.service';
 import { AssignmentDTO } from 'src/app/infrastructure/dto/assignment.dto';
+import { CustomerDTO } from 'src/app/infrastructure/dto/customer.dto';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-appointment-create',
@@ -21,12 +23,14 @@ export class AppointmentCreateComponent implements OnInit {
   priceTotal: number | undefined;
 
   assingments: AssignmentDTO[] = [];
+  customer: CustomerDTO | any;
   displayedColumns: string[] = ['nombre', 'precio'];
 
   constructor(
     private dateAdapter: DateAdapter<Date>,
     private activatedRoute: ActivatedRoute,
-    private assingmentService: AssignmentService
+    private assingmentService: AssignmentService,
+    private cookieService: CookieService
   ) {
     this.dateAdapter.setLocale('Es');
   }
@@ -47,13 +51,25 @@ export class AppointmentCreateComponent implements OnInit {
       idCustomer: new FormControl('', [Validators.required]),
       idsAssignment: new FormControl([''], [Validators.required])
     });
+
+    this.customer = JSON.parse(this.cookieService.get('usuario'));
+    console.log('this.customer ', this.customer);
   }
 
+  fechaCita(): string {
+    const fechaFormateada = this.pipe.transform(this.selected, 'dd/MM/yyyy');
+    this.appointmentForm.get('fecha')!.setValue(fechaFormateada);
+    return this.appointmentForm.get('fecha').value;
+  }
+  
   onCreater(): void {
     const fechaFormateada = this.pipe.transform(this.selected, 'dd/MM/yyyy');
 
     this.appointmentForm.get('fecha')!.setValue(fechaFormateada);
     this.appointmentForm.get('precioTotal')!.setValue(this.priceTotal);
+    this.appointmentForm.get('idCustomer').setValue(this.customer.id);
+    this.appointmentForm.get('idsAssignment').setValue(this.assingments.map(assignment => assignment.id));
+
     console.log('this.appointmentForm?.value ', this.appointmentForm?.value);
   }
 }
