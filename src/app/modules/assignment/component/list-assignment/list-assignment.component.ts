@@ -8,6 +8,7 @@ import { AssignmentRepositoryImpl } from 'src/app/infrastructure/repositories/as
 import { DialogElementsDialogComponent } from 'src/app/modules/component/dialog-elements-dialog/dialog-elements-dialog.component';
 import { AssignmentCardDialogComponent } from '../assignment-card-dialog/assignment-card-dialog.component';
 import { DataElement } from 'src/app/infrastructure/dto/data-table.dto';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-list-assignment',
@@ -28,7 +29,8 @@ export class ListAssignmentComponent implements OnInit {
   constructor(
     private assignmentRepositoryImpl: AssignmentRepositoryImpl,
     private router: Router,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private cookieService: CookieService
   ) { }
 
   ngOnInit() {
@@ -49,7 +51,7 @@ export class ListAssignmentComponent implements OnInit {
   }
 
   onAddAppointment(): void {
-    if (localStorage.getItem('TOKEN')) {
+    if (localStorage.getItem('TOKEN') && this.cookieService.check('usuario')) {
       if (this.selection.selected.length >= 1) {
         this.router.navigate(
           ['/appointment-create'],
