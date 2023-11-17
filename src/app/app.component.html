@@ -9,9 +9,19 @@
 
   <mat-sidenav [(opened)]="opened" mode="side">
     <mat-list>
-      <mat-list-item><a routerLink="/home">Home</a></mat-list-item>
-      <mat-list-item><a routerLink="/login">Login</a></mat-list-item>
-      <mat-list-item><a routerLink="/">Register</a></mat-list-item>
+      <mat-list-item> <a routerLink="/home"> Home </a> </mat-list-item>
+
+      <ng-template [ngIf]="validarTipoUsuario()" [ngIfElse]="loggedOut">
+        <mat-list-item><a routerLink="/">Review appointments</a></mat-list-item>
+        <mat-list-item><a routerLink="/">Generate appointment reports</a></mat-list-item>
+        <mat-list-item *ngIf="!isExistUser()"><a routerLink="/login">Login</a></mat-list-item>
+        <mat-list-item *ngIf="isExistUser()"><a routerLink="/home" (click)="cerrarSesion()">Sign out</a></mat-list-item>
+      </ng-template>
+
+      <ng-template #loggedOut>
+        <mat-list-item *ngIf="!isExistUser()"><a routerLink="/login">Login</a></mat-list-item>
+        <mat-list-item *ngIf="isExistUser()"><a routerLink="/home" (click)="cerrarSesion()">Sign out</a></mat-list-item>
+      </ng-template>
     </mat-list>
   </mat-sidenav>
 
