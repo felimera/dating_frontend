@@ -7,6 +7,7 @@ import { AssignmentService } from 'src/app/infrastructure/services/assignment.se
 import { AssignmentDTO } from 'src/app/infrastructure/dto/assignment.dto';
 import { CustomerDTO } from 'src/app/infrastructure/dto/customer.dto';
 import { CookieService } from 'ngx-cookie-service';
+import { AppointmentService } from 'src/app/infrastructure/services/appointment.service';
 
 @Component({
   selector: 'app-appointment-create',
@@ -30,7 +31,8 @@ export class AppointmentCreateComponent implements OnInit {
     private dateAdapter: DateAdapter<Date>,
     private activatedRoute: ActivatedRoute,
     private assingmentService: AssignmentService,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private appointmentService: AppointmentService
   ) {
     this.dateAdapter.setLocale('Es');
   }
@@ -61,7 +63,7 @@ export class AppointmentCreateComponent implements OnInit {
     this.appointmentForm.get('fecha')!.setValue(fechaFormateada);
     return this.appointmentForm.get('fecha').value;
   }
-  
+
   onCreater(): void {
     const fechaFormateada = this.pipe.transform(this.selected, 'dd/MM/yyyy');
 
@@ -70,6 +72,12 @@ export class AppointmentCreateComponent implements OnInit {
     this.appointmentForm.get('idCustomer').setValue(this.customer.id);
     this.appointmentForm.get('idsAssignment').setValue(this.assingments.map(assignment => assignment.id));
 
-    console.log('this.appointmentForm?.value ', this.appointmentForm?.value);
+    this.appointmentService
+      .postAppointment(this.appointmentForm.value)
+      .subscribe({
+        next: (res: any) => {
+          console.log('res ', res);
+        }, error: error => console.error('error', error)
+      })
   }
 }
