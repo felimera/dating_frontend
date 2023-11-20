@@ -8,6 +8,7 @@ import { AssignmentDTO } from 'src/app/infrastructure/dto/assignment.dto';
 import { CustomerDTO } from 'src/app/infrastructure/dto/customer.dto';
 import { CookieService } from 'ngx-cookie-service';
 import { AppointmentService } from 'src/app/infrastructure/services/appointment.service';
+import { ToasterService } from 'src/app/infrastructure/services/generally/toaster.service';
 
 @Component({
   selector: 'app-appointment-create',
@@ -32,7 +33,8 @@ export class AppointmentCreateComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private assingmentService: AssignmentService,
     private cookieService: CookieService,
-    private appointmentService: AppointmentService
+    private appointmentService: AppointmentService,
+    private toasterService: ToasterService
   ) {
     this.dateAdapter.setLocale('Es');
   }
@@ -76,7 +78,7 @@ export class AppointmentCreateComponent implements OnInit {
       .postAppointment(this.appointmentForm.value)
       .subscribe({
         next: (res: any) => {
-          console.log('res ', res);
+          this.toasterService.success('Registro guardado exitosamente.', 'Appoinment create')
         }, error: error => console.error('error', error)
       })
   }
