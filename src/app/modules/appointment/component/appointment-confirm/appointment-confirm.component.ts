@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { AppointmentService } from 'src/app/infrastructure/services/appointment.service';
 import { CookieService } from 'ngx-cookie-service';
 import { AppointmentDTO } from 'src/app/infrastructure/dto/appointment.dto';
 import { CustomerDTO } from 'src/app/infrastructure/dto/customer.dto';
@@ -42,12 +43,21 @@ export class AppointmentConfirmComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private appointmentService:AppointmentService,
     private cookieService: CookieService
   ) { }
 
   ngOnInit(): void {
     this.custumer = JSON.parse(this.cookieService.get('usuario'));
 
+    this.appointmentService
+    .getAppointmentByIdCustomer(this.custumer!.id)
+    .subscribe({
+      next:
+        (res:any)=>{
+          console.log("res",res);
+        }
+    })
   }
 
   onReturnHome(): void {
