@@ -38,6 +38,8 @@ import { CookieService } from 'ngx-cookie-service';
 
 import { AppInterceptorService } from './infrastructure/services/app-interceptor.service';
 
+import { ToastrModule } from 'ngx-toastr';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -70,7 +72,14 @@ import { AppInterceptorService } from './infrastructure/services/app-interceptor
     CurrencyPipe,
     MatTableModule,
     MatDialogModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    ToastrModule.forRoot({
+      timeOut: 3000, // Time to close the toaster (in milliseconds)
+      positionClass: 'toast-top-right', // Toast position
+      closeButton: true, // Show close button
+      progressBar: true, // Show progress bar
+    }
+    )
   ],
   providers: [CookieService,
     {

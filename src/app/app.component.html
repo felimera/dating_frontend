@@ -1,8 +1,19 @@
-<mat-toolbar color="primary">
-  <button (click)="opened=!opened" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-    <mat-icon>menu</mat-icon>
-  </button>
-  <span>Dating project</span>
+<mat-toolbar color="primary" >
+  <div class="container">
+    <div id="main-container">
+      <button (click)="opened=!opened" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>Dating project</span>
+    </div>
+
+    <div *ngIf="isExistUser()" id="user-container">
+      <label id="nombre">Nombre : {{customer.nombre +' '+customer.apellido}}</label>
+      <label class="data-user">Correo : {{customer.correo}}</label>
+      <label class="data-user">{{customer.rol}}</label>
+    </div>
+  </div>
+
 </mat-toolbar>
 
 <mat-sidenav-container>

@@ -16,3 +16,33 @@ mat-list-item :hover {
   padding: 15px;
   background-color: rgb(189, 189, 244);
 }
+
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+#user-container {
+  width: 20rem;
+}
+
+#user-container label {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  height: 15px;
+}
+
+#nombre {
+  font-size: 15px;
+  text-align: right;
+}
+
+.data-user {
+  padding: 1px;
+  font-size: 12px;
+  margin: 2px;
+  text-align: right;
+}

@@ -5,6 +5,8 @@ import { UserTokenService } from 'src/app/infrastructure/services/user-token.ser
 import { CustomerService } from 'src/app/infrastructure/services/customer.service';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { ToasterService } from 'src/app/infrastructure/services/generally/toaster.service';
+
 
 @Component({
   selector: 'app-user-login',
@@ -20,7 +22,8 @@ export class UserLoginComponent implements OnInit {
     private userLogin: UserTokenService,
     private router: Router,
     private customerService: CustomerService,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private toasterService: ToasterService
   ) { }
 
   ngOnInit() {
@@ -42,6 +45,7 @@ export class UserLoginComponent implements OnInit {
       next: (res: any) => {
         localStorage.setItem('TOKEN', res.jwtToken);
         this.consultarUsuario();
+        this.toasterService.success('This is a success message!', 'Success');
         this.router.navigateByUrl('/home');
       }, error: error => console.error('error', error)
     });
@@ -52,8 +56,8 @@ export class UserLoginComponent implements OnInit {
       .getByEmail(this.userTokenForm.get('email')!.value)
       .subscribe({
         next: (res: any) => {
-          console.log('res ', res);
           this.cookieService.set('usuario', JSON.stringify(res));
+          this.toasterService.success('This is a success message!', 'Success');
         }, error: error => console.error('error', error)
       })
   }
