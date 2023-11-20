@@ -40,6 +40,8 @@ import { AppInterceptorService } from './infrastructure/services/app-interceptor
 
 import { ToastrModule } from 'ngx-toastr';
 
+import { AppointmentConfirmComponent } from './modules/appointment/component/appointment-confirm/appointment-confirm.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,7 +49,8 @@ import { ToastrModule } from 'ngx-toastr';
     UserLoginComponent,
     UserCreateComponent,
     AppointmentCreateComponent,
-    DialogElementsDialogComponent
+    DialogElementsDialogComponent,
+    AppointmentConfirmComponent
   ],
   imports: [
     BrowserModule,

@@ -57,7 +57,6 @@ export class AppointmentCreateComponent implements OnInit {
     });
 
     this.customer = JSON.parse(this.cookieService.get('usuario'));
-    console.log('this.customer ', this.customer);
   }
 
   fechaCita(): string {

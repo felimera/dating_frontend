@@ -31,18 +31,18 @@ export class ListAssignmentComponent implements OnInit {
     private router: Router,
     public dialog: MatDialog,
     private cookieService: CookieService
-  ) { }
+    ) { }
 
-  ngOnInit() {
-    this.loadAssignment();
-  }
+    ngOnInit() {
+      this.loadAssignment();
+    }
 
 
-  loadAssignment(): void {
-    this.assignmentRepositoryImpl.getAll().subscribe({
-      next: (assignments: Assignment[]) => {
-        assignments.forEach(assignment => {
-          this.ELEMENT_DATA.push({ id: assignment.id, position: assignment.posicion, name: assignment.nombre, price: assignment.precio, symbol: '' });
+    loadAssignment(): void {
+      this.assignmentRepositoryImpl.getAll().subscribe({
+        next: (assignments: Assignment[]) => {
+          assignments.forEach(assignment => {
+            this.ELEMENT_DATA.push({ id: assignment.id, position: assignment.posicion, name: assignment.nombre, price: assignment.precio, symbol: '' });
         })
         this.dataSource = new MatTableDataSource<DataElement>(this.ELEMENT_DATA);
       },
@@ -58,16 +58,16 @@ export class ListAssignmentComponent implements OnInit {
           {
             queryParams: { ids: this.selection.selected.map(data => data.id) }
           }
-        );
-      }
-    } else {
-      const dialogRef = this.dialog.open(DialogElementsDialogComponent, {
-        data: { valid: this.valid },
-      });
+          );
+        }
+      } else {
+        const dialogRef = this.dialog.open(DialogElementsDialogComponent, {
+          data: { valid: this.valid },
+        });
 
-      dialogRef.afterClosed().subscribe(result => {
-        this.valid = result.valid
-        if (this.valid)
+        dialogRef.afterClosed().subscribe(result => {
+          this.valid = result.valid
+          if (this.valid)
           this.router.navigateByUrl('/login');
       });
     }
@@ -103,5 +103,9 @@ export class ListAssignmentComponent implements OnInit {
     this.dialog.open(AssignmentCardDialogComponent, {
       data: { key: elemnt.id }
     });
+  }
+
+  onAppointmentConfirm():void {
+    this.router.navigateByUrl('/appointment-confirm');
   }
 }
