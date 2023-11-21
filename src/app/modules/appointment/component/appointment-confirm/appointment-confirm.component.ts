@@ -68,6 +68,8 @@ export class AppointmentConfirmComponent implements OnInit {
 
   onEditarAppointment(idAppointment: number): void {
     this.dialog.open(AppointmentEditComponent, {
+      height: '370px',
+      width: '500px',
       data: { key: idAppointment }
     });
   }

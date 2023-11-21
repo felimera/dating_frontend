@@ -1,1 +1,24 @@
-<p>appointment-edit works!</p>
+<form [formGroup]="appointmentForm">
+<div id="container">
+  <div id="container-date">
+    <mat-card class="demo-inline-calendar-card">
+      <mat-calendar [(selected)]="selected"></mat-calendar>
+    </mat-card>
+  </div>
+
+  <div id="container-rigth">
+    <div id="container-time">
+      <mat-list>
+      <mat-list-item>
+        <input id="appt-time" type="time" matInput name="appt-time" formControlName="hora" />
+      </mat-list-item>
+      <mat-divider></mat-divider>
+    </mat-list>
+    </div>
+
+    <div id="container-button">
+      <button mat-raised-button color="primary" (click)="onEditAppointment()">Guardar</button>
+    </div>
+  </div>
+</div>
+</form>
