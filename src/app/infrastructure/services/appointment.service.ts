@@ -17,8 +17,7 @@ export class AppointmentService {
     return this.http.post<Appointment>(this.apiUrl, appointment);
   }
 
-  getAppointmentByIdCustomer(idCustomer: number): Observable<Array<Appointment>> {
-    return this.http.get<Array<Appointment>>(`${this.apiUrl}/customer?idCustomer=${idCustomer}`)
-      .pipe(map((apiAppointment) => apiAppointment.map(AppointmentMapper.fromApiToDomain)));
+  putAppointment(idAppointment: number, appointment: Appointment): Observable<Appointment> {
+    return this.http.put<Appointment>(`${this.apiUrl}/${idAppointment}`, appointment);
   }
 }
