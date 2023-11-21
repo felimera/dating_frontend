@@ -6,6 +6,8 @@ import { AppointmentTableService } from 'src/app/infrastructure/services/appoint
 import { AppointmentTable } from 'src/app/core/models/appointment-table.model';
 import { AppointmentTableDTO } from 'src/app/infrastructure/dto/appointment-table.dto';
 import { ContentTableDTO } from 'src/app/infrastructure/dto/content-table.dto';
+import { AppointmentEditComponent } from '../../dialog/appointment-edit/appointment-edit.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-appointment-confirm',
@@ -27,7 +29,8 @@ export class AppointmentConfirmComponent implements OnInit {
   constructor(
     private router: Router,
     private appointmentTableService: AppointmentTableService,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -61,5 +64,11 @@ export class AppointmentConfirmComponent implements OnInit {
 
   onReturnHome(): void {
     this.router.navigateByUrl('/home');
+  }
+
+  onEditarAppointment(idAppointment: number): void {
+    this.dialog.open(AppointmentEditComponent, {
+      data: { key: idAppointment }
+    });
   }
 }
