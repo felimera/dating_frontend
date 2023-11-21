@@ -14,6 +14,11 @@
     </div>
     <div>
       <mat-accordion id="container-panel" *ngFor="let item of dataSource">
+        <div id="edit-button">
+          <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </div>
         <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
 
           <mat-expansion-panel-header>
@@ -48,7 +53,16 @@
             <!-- Symbol Column -->
             <ng-container matColumnDef="symbol">
               <th class="text-center" mat-header-cell *matHeaderCellDef> Symbol </th>
-              <td mat-cell class="text-rigth" *matCellDef="let element"> </td>
+              <td mat-cell class="text-rigth" *matCellDef="let element">
+                <div class="container-button">
+                  <button mat-mini-fab color="primary" aria-label="Example icon button with a plus one icon">
+                    <mat-icon>change_circle</mat-icon>
+                  </button>
+                  <button mat-mini-fab color="accent" aria-label="Example icon button with a plus one icon">
+                    <mat-icon>cancel</mat-icon>
+                  </button>
+                </div>
+              </td>
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

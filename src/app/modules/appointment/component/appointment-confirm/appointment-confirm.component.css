@@ -44,6 +44,12 @@
   border: 1px white solid;
 }
 
+#edit-button {
+  text-align: right;
+  padding-bottom: 5px;
+  padding-right: 10px;
+}
+
 table {
   width: 100%;
 }
@@ -70,4 +76,14 @@ mat-expansion-panel-header div span {
 .text-center {
   text-align: center;
   font-weight: bold;
+}
+
+.container-button {
+  display: table-cell;
+  display: grid;
+  display: inline-table;
+}
+
+.container-button button {
+  margin-left: .4rem;
 }
