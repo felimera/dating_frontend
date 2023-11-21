@@ -56,7 +56,6 @@ export class AppointmentConfirmComponent implements OnInit {
   }
 
   isExitData(): boolean {
-    console.log(this.dataAppTableDTO)
     return this.dataAppTableDTO.length > 0;
   }
 
