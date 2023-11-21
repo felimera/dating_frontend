@@ -15,8 +15,12 @@ export class AppointmentRepositoryImpl implements AppointmentRepository {
   postAppointment(appointment: Appointment): Observable<Appointment> {
     return this.appointmentService.postAppointment(appointment);
   }
-  
+
   putAppointment(idAppointment: number, appointment: Appointment): Observable<Appointment> {
     return this.appointmentService.putAppointment(idAppointment, appointment);
+  }
+
+  getById(idAppointment: number): Observable<Appointment> {
+    return this.appointmentService.getById(idAppointment);
   }
 }

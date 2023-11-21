@@ -20,4 +20,8 @@ export class AppointmentService {
   putAppointment(idAppointment: number, appointment: Appointment): Observable<Appointment> {
     return this.http.put<Appointment>(`${this.apiUrl}/${idAppointment}`, appointment);
   }
+
+  getById(idAppointment: number): Observable<Appointment> {
+    return this.http.get<Appointment>(`${this.apiUrl}/${idAppointment}`);
+  }
 }
