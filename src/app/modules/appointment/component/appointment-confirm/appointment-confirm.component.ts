@@ -8,6 +8,9 @@ import { AppointmentTableDTO } from 'src/app/infrastructure/dto/appointment-tabl
 import { ContentTableDTO } from 'src/app/infrastructure/dto/content-table.dto';
 import { AppointmentEditComponent } from '../../dialog/appointment-edit/appointment-edit.component';
 import { MatDialog } from '@angular/material/dialog';
+import { AppointmentService } from 'src/app/infrastructure/services/appointment.service';
+import { Appointment } from 'src/app/core/models/appointment.model';
+import { ToasterService } from 'src/app/infrastructure/services/generally/toaster.service';
 
 @Component({
   selector: 'app-appointment-confirm',
@@ -25,12 +28,15 @@ export class AppointmentConfirmComponent implements OnInit {
   panelOpenState = false;
 
   custumer: CustomerDTO | undefined;
+  appointment: Appointment | undefined;
 
   constructor(
     private router: Router,
     private appointmentTableService: AppointmentTableService,
     private cookieService: CookieService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private appointmentService: AppointmentService,
+    private toasterService: ToasterService
   ) { }
 
   ngOnInit(): void {
@@ -50,7 +56,7 @@ export class AppointmentConfirmComponent implements OnInit {
               app.contentTableList.forEach(element => {
                 this.dataTableDTO.push({ idAssignment: element.idAssignment, nombre: element.nombre, descripcion: element.descripcion, precio: element.precio })
               })
-              this.dataAppTableDTO.push({ idAppointment: app.idAppointment, fecha: app.fecha, precioTotal: app.precioTotal, contentTableList: this.dataTableDTO });
+              this.dataAppTableDTO.push({ idAppointment: app.idAppointment, fecha: app.fecha, fechaSinFor: app.fechaSinFor, precioTotal: app.precioTotal, contentTableList: this.dataTableDTO });
             })
             this.dataSource = this.dataAppTableDTO;
           },
@@ -72,5 +78,29 @@ export class AppointmentConfirmComponent implements OnInit {
       width: '500px',
       data: { id: app.idAppointment, price: app.precioTotal }
     });
+  }
+
+  onRemoveAssignment(idAssignment: number, fecha: string): void {
+    if (confirm('¿Seguro deseas retirar este Assignment del Appointment?')) {
+      this.appointment = {
+        idCustomer: this.custumer!.id,
+        fecha: fecha,
+        idAssignment: idAssignment
+      }
+
+      this.appointmentService
+        .deleteAppointmentByAssignment(this.appointment!)
+        .subscribe({
+          next: (res: any) => {
+            if (res) {
+              this.toasterService.success(res.message, 'Appoinment remove');
+              setTimeout(() => {
+                this.router.navigateByUrl('/appointment-confirm');
+              }, 3000);
+            }
+          },
+          error: error => console.log(error)
+        });
+    }
   }
 }
