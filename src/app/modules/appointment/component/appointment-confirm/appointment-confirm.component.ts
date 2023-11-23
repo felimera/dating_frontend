@@ -72,6 +72,10 @@ export class AppointmentConfirmComponent implements OnInit {
     this.router.navigateByUrl('/home');
   }
 
+  isMoreThanTwoElements(elements: ContentTableDTO[]): boolean {
+    return elements.length == 2;
+  }
+
   onEditarAppointment(app: AppointmentTableDTO): void {
     this.dialog.open(AppointmentEditComponent, {
       height: '370px',
