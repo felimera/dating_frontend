@@ -1,12 +1,12 @@
 <div id="container">
-  <mat-card>
+  <mat-card *ngIf="assignment">
     <mat-card-header>
-      <mat-card-title>{{assignment.nombre}}</mat-card-title>
+      <mat-card-title>{{assignment!.nombre}}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <p *ngIf="assignment.descripcion.length!==0" class="text-content">
-        Descripcion : <span>{{assignment.descripcion}}</span></p>
-      <p class="text-content">Precio : <span>{{assignment.precio}}</span></p>
+      <p *ngIf="assignment!.descripcion.length!==0" class="text-content">
+        Descripcion : <span>{{assignment!.descripcion}}</span></p>
+      <p class="text-content">Precio : <span>{{assignment!.precio}}</span></p>
     </mat-card-content>
     <mat-card-actions>
       <button mat-raised-button color="warn" (click)="onNoClick()">Cerrar</button>

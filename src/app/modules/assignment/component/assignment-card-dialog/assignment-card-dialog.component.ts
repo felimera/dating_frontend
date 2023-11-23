@@ -1,11 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Router } from '@angular/router';
-import { Assignment } from 'src/app/core/models/assignment.model';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { AssignmentService } from 'src/app/infrastructure/services/assignment.service';
 import { CommonModule } from '@angular/common';
+import { AssignmentDTO } from 'src/app/infrastructure/dto/assignment.dto';
 
 @Component({
   selector: 'app-assignment-card-dialog',
@@ -16,19 +15,22 @@ import { CommonModule } from '@angular/common';
 })
 export class AssignmentCardDialogComponent implements OnInit {
 
-  assignment: Assignment | any;
+  assignment: AssignmentDTO | undefined;
 
   constructor(
-    private router: Router,
     public dialogRef: MatDialogRef<AssignmentCardDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private assignmentService: AssignmentService
   ) { }
 
   ngOnInit(): void {
-    this.assignmentService.getById(this.data.key).subscribe((res: any) => {
-      this.assignment = res;
-    });
+    this.assignmentService.getById(this.data.key)
+      .subscribe({
+        next: (res: AssignmentDTO) => {
+          this.assignment = res;
+        },
+        error: error => console.log(error)
+      });
   }
 
   onNoClick(): void {
