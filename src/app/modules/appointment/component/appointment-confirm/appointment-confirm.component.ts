@@ -66,11 +66,11 @@ export class AppointmentConfirmComponent implements OnInit {
     this.router.navigateByUrl('/home');
   }
 
-  onEditarAppointment(idAppointment: number): void {
+  onEditarAppointment(app: AppointmentTableDTO): void {
     this.dialog.open(AppointmentEditComponent, {
       height: '370px',
       width: '500px',
-      data: { key: idAppointment }
+      data: { id: app.idAppointment, price: app.precioTotal }
     });
   }
 }
