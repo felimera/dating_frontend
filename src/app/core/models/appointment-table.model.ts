@@ -4,6 +4,7 @@ export class AppointmentTable {
   constructor(
     public idAppointment: number,
     public fecha: string,
+    public fechaSinFor: string,
     public precioTotal: number,
     public contentTableList: Array<ContentTable>
   ) { }
