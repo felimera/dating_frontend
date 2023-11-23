@@ -23,4 +23,8 @@ export class AppointmentRepositoryImpl implements AppointmentRepository {
   getById(idAppointment: number): Observable<Appointment> {
     return this.appointmentService.getById(idAppointment);
   }
+
+  deleteAppointmentByAssignment(appointment: Appointment): Observable<any> {
+    return this.appointmentService.deleteAppointmentByAssignment(appointment);
+  }
 }

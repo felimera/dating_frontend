@@ -1,8 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { Appointment } from 'src/app/core/models/appointment.model';
-import { AppointmentMapper } from 'src/app/core/mappers/appointment.mapper';
 
 @Injectable({
   providedIn: 'root'
@@ -23,5 +22,13 @@ export class AppointmentService {
 
   getById(idAppointment: number): Observable<Appointment> {
     return this.http.get<Appointment>(`${this.apiUrl}/${idAppointment}`);
+  }
+
+  deleteAppointmentByAssignment(appointment: Appointment): Observable<any> {
+    const options = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+      body: appointment,
+    };
+    return this.http.delete<any>(`${this.apiUrl}/assignment`, options);
   }
 }
