@@ -60,6 +60,9 @@ export class UserEditComponent implements OnInit {
           if (res) {
             this.cookieService.set('usuario', JSON.stringify(res));
             this.toasterService.info('Usuario editado con exito.', 'Customer edit');
+            setTimeout(() => {
+              window.location.reload();
+            }, 3000);
           }
         },
         error: error => console.log(error)

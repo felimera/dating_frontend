@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { CustomerDTO } from './infrastructure/dto/customer.dto';
 import { Router } from '@angular/router';
+import { ToasterService } from './infrastructure/services/generally/toaster.service';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +18,8 @@ export class AppComponent implements OnInit {
 
   constructor(
     private cookieService: CookieService,
-    private router: Router
+    private router: Router,
+    private toasterService: ToasterService
   ) { }
 
   ngOnInit(): void {
@@ -39,6 +41,10 @@ export class AppComponent implements OnInit {
   cerrarSesion(): void {
     this.cookieService.delete('usuario');
     localStorage.removeItem('TOKEN');
-    this.router.navigateByUrl('/');
+    this.toasterService.info('Haz cerrado sesion.', 'User sign out')
+    setTimeout(() => {
+      window.location.reload();
+      this.router.navigateByUrl('/');
+    }, 3000);
   }
 }

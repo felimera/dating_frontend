@@ -46,6 +46,9 @@ export class UserLoginComponent implements OnInit {
         localStorage.setItem('TOKEN', res.jwtToken);
         this.consultarUsuario();
         this.toasterService.success('This is a success message!', 'Success');
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
         this.router.navigateByUrl('/home');
       }, error: error => console.error('error', error)
     });
