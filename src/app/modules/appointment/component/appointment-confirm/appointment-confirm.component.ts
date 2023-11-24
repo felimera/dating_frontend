@@ -56,7 +56,7 @@ export class AppointmentConfirmComponent implements OnInit {
               app.contentTableList.forEach(element => {
                 this.dataTableDTO.push({ idAssignment: element.idAssignment, nombre: element.nombre, descripcion: element.descripcion, precio: element.precio })
               })
-              this.dataAppTableDTO.push({ idAppointment: app.idAppointment, fecha: app.fecha, fechaSinFor: app.fechaSinFor, precioTotal: app.precioTotal, contentTableList: this.dataTableDTO });
+              this.dataAppTableDTO.push({ idAppointment: app.idAppointment, fecha: app.fecha, fechaSinFor: app.fechaSinFor, horaSinFor: app.horaSinFor, precioTotal: app.precioTotal, contentTableList: this.dataTableDTO });
             })
             this.dataSource = this.dataAppTableDTO;
           },
@@ -80,7 +80,7 @@ export class AppointmentConfirmComponent implements OnInit {
     this.dialog.open(AppointmentEditComponent, {
       height: '370px',
       width: '500px',
-      data: { id: app.idAppointment, price: app.precioTotal }
+      data: { id: app.idAppointment, price: app.precioTotal, fecha: app.fechaSinFor, hora: app.horaSinFor }
     });
   }
 

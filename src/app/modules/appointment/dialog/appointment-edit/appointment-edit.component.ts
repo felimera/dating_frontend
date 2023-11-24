@@ -22,9 +22,11 @@ export class AppointmentEditComponent implements OnInit {
   customer: CustomerDTO | any;
   idAppointment: number | undefined;
   priceAppointment: string | undefined;
+  fechaAppointment: string | undefined;
+  horaAppointment: string | undefined;
 
-  selected?: Date | null;
   pipe = new DatePipe('en-US');
+
 
   constructor(
     public dialogRef: MatDialogRef<AppointmentEditComponent>,
@@ -42,10 +44,14 @@ export class AppointmentEditComponent implements OnInit {
 
     this.idAppointment = this.data.id;
     this.priceAppointment = this.data.price;
+    this.fechaAppointment = this.data.fecha;
+    this.horaAppointment = this.data.hora;
+
+    const fechaFormateada = this.pipe.transform(this.fechaAppointment, 'MM-dd-yyyy');
 
     this.appointmentForm = new FormGroup({
-      fecha: new FormControl('', [Validators.required]),
-      hora: new FormControl('', [Validators.required]),
+      fecha: new FormControl(new Date(fechaFormateada!), [Validators.required]),
+      hora: new FormControl(this.horaAppointment, [Validators.required]),
       precioTotal: new FormControl('', [Validators.required]),
       idCustomer: new FormControl('', [Validators.required])
     });
@@ -60,7 +66,8 @@ export class AppointmentEditComponent implements OnInit {
 
   onEditAppointment(): void {
 
-    const fechaFormateada = this.pipe.transform(this.selected, 'dd/MM/yyyy');
+    const fechaSelected = this.appointmentForm.get('fecha').value;
+    const fechaFormateada = this.pipe.transform(fechaSelected, 'dd/MM/yyyy');
     this.appointmentForm.get('fecha')!.setValue(fechaFormateada);
     this.appointmentForm.get('precioTotal')!.setValue(this.clearPriceFormat(this.priceAppointment));
     this.appointmentForm.get('idCustomer')!.setValue(this.customer.id);
@@ -69,10 +76,10 @@ export class AppointmentEditComponent implements OnInit {
       .subscribe({
         next: (res: Appointment) => {
           if (res) {
-            this.toasterService.success('Registro guardado exitosamente.', 'Appoinment create')
+            this.toasterService.success('Registro guardado exitosamente.', 'Appoinment edit')
             setTimeout(() => {
               this.onNoClick();
-            }, 2000);
+            }, 1000);
           }
         }
       });
