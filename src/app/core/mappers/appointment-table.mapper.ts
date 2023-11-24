@@ -7,6 +7,7 @@ export class AppointmentTableMapper {
       idAppointment: apiAppointmentTable.idAppointment,
       fecha: apiAppointmentTable.fecha,
       fechaSinFor: apiAppointmentTable.fechaSinFor,
+      horaSinFor: apiAppointmentTable.horaSinFor,
       precioTotal: apiAppointmentTable.precioTotal,
       contentTableList: apiAppointmentTable.contentTableList
     };
@@ -17,6 +18,7 @@ export class AppointmentTableMapper {
       idAppointment: domainAppointmentTable.idAppointment,
       fecha: domainAppointmentTable.fecha,
       fechaSinFor: domainAppointmentTable.fechaSinFor,
+      horaSinFor: domainAppointmentTable.horaSinFor,
       precioTotal: domainAppointmentTable.precioTotal,
       contentTableList: domainAppointmentTable.contentTableList
     };

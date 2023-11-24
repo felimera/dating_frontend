@@ -5,6 +5,7 @@ export class AppointmentTable {
     public idAppointment: number,
     public fecha: string,
     public fechaSinFor: string,
+    public horaSinFor: string,
     public precioTotal: number,
     public contentTableList: Array<ContentTable>
   ) { }
