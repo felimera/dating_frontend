@@ -14,4 +14,8 @@ export class CustomerRepositoryImpl implements CustomerRepository {
   getByEmail(email: string): Observable<Customer> {
     return this.customerService.getByEmail(email);
   }
+
+  putCustomer(id: number, customer: Customer): Observable<Customer> {
+    return this.customerService.putCustomer(id, customer);
+  }
 }

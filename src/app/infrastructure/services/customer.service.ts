@@ -18,4 +18,9 @@ export class CustomerService {
       .get<Customer>(`${this.apiUrl}/findemail?email=${email}`)
       .pipe(map((apiCustomer) => CustomerMapper.fromDomainToApi(apiCustomer)));
   }
+
+  putCustomer(id: number, customer: Customer): Observable<Customer> {
+    return this.http
+      .put<Customer>(`${this.apiUrl}/${id}`, customer);
+  }
 }
