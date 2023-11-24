@@ -9,6 +9,7 @@ import { DialogElementsDialogComponent } from 'src/app/modules/component/dialog-
 import { AssignmentCardDialogComponent } from '../assignment-card-dialog/assignment-card-dialog.component';
 import { DataElement } from 'src/app/infrastructure/dto/data-table.dto';
 import { CookieService } from 'ngx-cookie-service';
+import { ToasterService } from 'src/app/infrastructure/services/generally/toaster.service';
 
 @Component({
   selector: 'app-list-assignment',
@@ -30,19 +31,20 @@ export class ListAssignmentComponent implements OnInit {
     private assignmentRepositoryImpl: AssignmentRepositoryImpl,
     private router: Router,
     public dialog: MatDialog,
-    private cookieService: CookieService
-    ) { }
+    private cookieService: CookieService,
+    private toasterService: ToasterService
+  ) { }
 
-    ngOnInit() {
-      this.loadAssignment();
-    }
+  ngOnInit() {
+    this.loadAssignment();
+  }
 
 
-    loadAssignment(): void {
-      this.assignmentRepositoryImpl.getAll().subscribe({
-        next: (assignments: Assignment[]) => {
-          assignments.forEach(assignment => {
-            this.ELEMENT_DATA.push({ id: assignment.id, position: assignment.posicion, name: assignment.nombre, price: assignment.precio, symbol: '' });
+  loadAssignment(): void {
+    this.assignmentRepositoryImpl.getAll().subscribe({
+      next: (assignments: Assignment[]) => {
+        assignments.forEach(assignment => {
+          this.ELEMENT_DATA.push({ id: assignment.id, position: assignment.posicion, name: assignment.nombre, price: assignment.precio, symbol: '' });
         })
         this.dataSource = new MatTableDataSource<DataElement>(this.ELEMENT_DATA);
       },
@@ -52,24 +54,29 @@ export class ListAssignmentComponent implements OnInit {
 
   onAddAppointment(): void {
     if (localStorage.getItem('TOKEN') && this.cookieService.check('usuario')) {
-      if (this.selection.selected.length >= 1) {
-        this.router.navigate(
-          ['/appointment-create'],
-          {
-            queryParams: { ids: this.selection.selected.map(data => data.id) }
-          }
-          );
-        }
-      } else {
-        const dialogRef = this.dialog.open(DialogElementsDialogComponent, {
-          data: { valid: this.valid },
-        });
+      this.validarCantidadAssignment();
+    } else {
+      const dialogRef = this.dialog.open(DialogElementsDialogComponent, {
+        data: { valid: this.valid },
+      });
 
-        dialogRef.afterClosed().subscribe(result => {
-          this.valid = result.valid
-          if (this.valid)
+      dialogRef.afterClosed().subscribe(result => {
+        this.valid = result.valid
+        if (this.valid)
           this.router.navigateByUrl('/login');
       });
+    }
+  }
+
+  validarCantidadAssignment(): void {
+    if (this.selection.selected.length <= 2) {
+      this.router.navigate(
+        ['/appointment-create'],
+        {
+          queryParams: { ids: this.selection.selected.map(data => data.id) }
+        });
+    } else {
+      this.toasterService.warning('Lo sentimos, solo puede elejir maximo 2 servicios por cita.', 'Assignmnet warning');
     }
   }
 
@@ -105,7 +112,7 @@ export class ListAssignmentComponent implements OnInit {
     });
   }
 
-  onAppointmentConfirm():void {
+  onAppointmentConfirm(): void {
     this.router.navigateByUrl('/appointment-confirm');
   }
 }
