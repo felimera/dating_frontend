@@ -69,14 +69,16 @@ export class ListAssignmentComponent implements OnInit {
   }
 
   validarCantidadAssignment(): void {
-    if (this.selection.selected.length <= 2) {
+    if (this.selection.selected.length <= 0) {
+      this.toasterService.info('Debe seleccionar por lo menos 1 servicio.', 'Assignmnet information');
+    } else if (this.selection.selected.length > 2) {
+      this.toasterService.info('Lo sentimos, solo puede elejir maximo 2 servicios por cita.', 'Assignmnet information');
+    } else {
       this.router.navigate(
         ['/appointment-create'],
         {
           queryParams: { ids: this.selection.selected.map(data => data.id) }
         });
-    } else {
-      this.toasterService.warning('Lo sentimos, solo puede elejir maximo 2 servicios por cita.', 'Assignmnet warning');
     }
   }
 
