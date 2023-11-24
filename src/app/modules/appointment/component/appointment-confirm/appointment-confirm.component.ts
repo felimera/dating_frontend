@@ -78,7 +78,7 @@ export class AppointmentConfirmComponent implements OnInit {
 
   onEditarAppointment(app: AppointmentTableDTO): void {
     this.dialog.open(AppointmentEditComponent, {
-      height: '370px',
+      height: '180px',
       width: '500px',
       data: { id: app.idAppointment, price: app.precioTotal, fecha: app.fechaSinFor, hora: app.horaSinFor }
     });
