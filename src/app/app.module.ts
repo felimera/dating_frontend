@@ -42,6 +42,7 @@ import { ToastrModule } from 'ngx-toastr';
 
 import { AppointmentConfirmComponent } from './modules/appointment/component/appointment-confirm/appointment-confirm.component';
 import { AppointmentEditComponent } from './modules/appointment/dialog/appointment-edit/appointment-edit.component';
+import { UserEditComponent } from './modules/user/component/user-edit/user-edit.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { AppointmentEditComponent } from './modules/appointment/dialog/appointme
     AppointmentCreateComponent,
     DialogElementsDialogComponent,
     AppointmentConfirmComponent,
-    AppointmentEditComponent
+    AppointmentEditComponent,
+    UserEditComponent
   ],
   imports: [
     BrowserModule,
