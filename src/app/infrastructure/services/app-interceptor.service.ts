@@ -11,12 +11,10 @@ export class AppInterceptorService implements HttpInterceptor {
   url401 = '';
   reload = 0;
 
-  constructor(private router: Router) { }
-
   intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     const token = localStorage.getItem('TOKEN')
     const apiReq = req.clone({
-      headers: req.headers.set('Authorization', 'Bearer ' + token)
+      headers: req.headers.set('Authorization', token !== null ? 'Bearer ' + token : '')
     });
     return next.handle(apiReq);
   }
