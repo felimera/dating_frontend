@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserSignupService } from 'src/app/infrastructure/services/user-signup.service';
 import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
+import { ToasterService } from 'src/app/infrastructure/services/generally/toaster.service';
 
 @Component({
   selector: 'app-user-create',
@@ -13,7 +14,11 @@ export class UserCreateComponent implements OnInit {
   userForm!: FormGroup;
   hide = true;
 
-  constructor(private userSignupService: UserSignupService, private router: Router) { }
+  constructor(
+    private userSignupService: UserSignupService,
+    private router: Router,
+    private toasterService: ToasterService
+  ) { }
 
   pipe = new DatePipe('en-US');
 
@@ -65,7 +70,12 @@ export class UserCreateComponent implements OnInit {
     this.userSignupService
       .createUser(this.userForm.value)
       .subscribe({
-        next: (res: any) => { this.router.navigateByUrl('/login'); }
+        next: (res: any) => {
+          if (res) {
+            this.toasterService.info(res.message, "Customer create");
+            this.router.navigateByUrl('/login');
+          }
+        }
         , error: (error) => console.log('error', error)
       });
   }

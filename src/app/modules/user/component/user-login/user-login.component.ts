@@ -50,7 +50,9 @@ export class UserLoginComponent implements OnInit {
           window.location.reload();
         }, 3000);
         this.router.navigateByUrl('/home');
-      }, error: error => console.error('error', error)
+      }, error: (res:any) =>{
+        this.toasterService.error(res.error.message,"Login error");
+      }
     });
   }
 
@@ -61,7 +63,9 @@ export class UserLoginComponent implements OnInit {
         next: (res: any) => {
           this.cookieService.set('usuario', JSON.stringify(res));
           this.toasterService.success('This is a success message!', 'Success');
-        }, error: error => console.error('error', error)
+        }, error: (res:any) =>{
+          this.toasterService.error(res.error.message,"Login error");
+        }
       })
   }
 
