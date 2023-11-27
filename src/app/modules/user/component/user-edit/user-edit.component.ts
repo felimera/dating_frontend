@@ -52,12 +52,13 @@ export class UserEditComponent implements OnInit {
   onEditUser(): void {
     const fechaFormateada = this.pipe.transform(this.userForm.get('fechaNacimiento')?.value, 'dd/MM/yyyy');
     this.userForm.get('fechaNacimiento')?.setValue(fechaFormateada);
-
     this.customerService
       .putCustomer(this.usuario!.id, this.userForm.value)
       .subscribe({
         next: (res: Customer) => {
           if (res) {
+            localStorage.removeItem('TOKEN');
+            localStorage.setItem('TOKEN', res.token!)
             this.cookieService.set('usuario', JSON.stringify(res));
             this.toasterService.info('Usuario editado con exito.', 'Customer edit');
             setTimeout(() => {
@@ -65,8 +66,7 @@ export class UserEditComponent implements OnInit {
             }, 3000);
           }
         },
-        error: error => console.log(error)
-
+        error: (res: any) => console.log(res)
       });
   }
 

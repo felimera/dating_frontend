@@ -7,6 +7,7 @@ export class Customer {
     public correo: string,
     public rol: string,
     public genero: string,
-    public fechaNacimiento: string
+    public fechaNacimiento: string,
+    public token?: string
   ) { }
 }
