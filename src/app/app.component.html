@@ -1,7 +1,8 @@
-<mat-toolbar color="primary" >
+<mat-toolbar color="primary">
   <div class="container">
     <div id="main-container">
-      <button (click)="opened=!opened" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+      <button (click)="opened=!opened" mat-icon-button class="example-icon"
+        aria-label="Example icon-button with menu icon">
         <mat-icon>menu</mat-icon>
       </button>
       <span>Dating project</span>
@@ -31,7 +32,8 @@
 
       <ng-template #loggedOut>
         <mat-list-item *ngIf="!isExistUser()"><a routerLink="/login">Login</a></mat-list-item>
-        <mat-list-item *ngIf="isExistUser()"><a routerLink="/user-edit" >User edit</a></mat-list-item>
+        <mat-list-item *ngIf="isExistUser()"><a routerLink="/user-edit">User edit</a></mat-list-item>
+        <mat-list-item *ngIf="isExistUser()"><a routerLink="/user-password">User password</a></mat-list-item>
         <mat-list-item *ngIf="isExistUser()"><a routerLink="/home" (click)="cerrarSesion()">Sign out</a></mat-list-item>
       </ng-template>
     </mat-list>
