@@ -43,6 +43,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { AppointmentConfirmComponent } from './modules/appointment/component/appointment-confirm/appointment-confirm.component';
 import { AppointmentEditComponent } from './modules/appointment/dialog/appointment-edit/appointment-edit.component';
 import { UserEditComponent } from './modules/user/component/user-edit/user-edit.component';
+import { UserPasswordComponent } from './modules/user/component/user-password/user-password.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { UserEditComponent } from './modules/user/component/user-edit/user-edit.
     DialogElementsDialogComponent,
     AppointmentConfirmComponent,
     AppointmentEditComponent,
-    UserEditComponent
+    UserEditComponent,
+    UserPasswordComponent
   ],
   imports: [
     BrowserModule,

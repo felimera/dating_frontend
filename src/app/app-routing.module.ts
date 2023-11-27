@@ -7,12 +7,14 @@ import { AppointmentCreateComponent } from './modules/appointment/component/appo
 import { AppointmentConfirmComponent } from './modules/appointment/component/appointment-confirm/appointment-confirm.component';
 import { AppointmentEditComponent } from './modules/appointment/dialog/appointment-edit/appointment-edit.component';
 import { UserEditComponent } from './modules/user/component/user-edit/user-edit.component';
+import { UserPasswordComponent } from './modules/user/component/user-password/user-password.component';
 
 const routes: Routes = [
   { path: "home", component: ListAssignmentComponent },
   { path: "login", component: UserLoginComponent },
   { path: "user-create", component: UserCreateComponent },
   { path: "user-edit", component: UserEditComponent },
+  { path: "user-password", component: UserPasswordComponent },
   { path: "appointment-create", component: AppointmentCreateComponent },
   { path: "appointment-confirm", component: AppointmentConfirmComponent },
   { path: "appointment-edit-dialog", component: AppointmentEditComponent }
