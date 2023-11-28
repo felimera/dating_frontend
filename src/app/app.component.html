@@ -23,19 +23,15 @@
     <mat-list>
       <mat-list-item> <a routerLink="/home"> Home </a> </mat-list-item>
 
-      <ng-template [ngIf]="validarTipoUsuario()" [ngIfElse]="loggedOut">
+      <ng-template [ngIf]="validarTipoUsuario()">
         <mat-list-item><a routerLink="/">Review appointments</a></mat-list-item>
         <mat-list-item><a routerLink="/">Generate appointment reports</a></mat-list-item>
-        <mat-list-item *ngIf="!isExistUser()"><a routerLink="/login">Login</a></mat-list-item>
-        <mat-list-item *ngIf="isExistUser()"><a routerLink="/home" (click)="cerrarSesion()">Sign out</a></mat-list-item>
       </ng-template>
 
-      <ng-template #loggedOut>
-        <mat-list-item *ngIf="!isExistUser()"><a routerLink="/login">Login</a></mat-list-item>
-        <mat-list-item *ngIf="isExistUser()"><a routerLink="/user-edit">User edit</a></mat-list-item>
-        <mat-list-item *ngIf="isExistUser()"><a routerLink="/user-password">User password</a></mat-list-item>
-        <mat-list-item *ngIf="isExistUser()"><a routerLink="/home" (click)="cerrarSesion()">Sign out</a></mat-list-item>
-      </ng-template>
+      <mat-list-item *ngIf="!isExistUser()"><a routerLink="/login">Login</a></mat-list-item>
+      <mat-list-item *ngIf="isExistUser()"><a routerLink="/user-edit">User edit</a></mat-list-item>
+      <mat-list-item *ngIf="isExistUser()"><a routerLink="/user-password">User password</a></mat-list-item>
+      <mat-list-item *ngIf="isExistUser()"><a routerLink="/home" (click)="cerrarSesion()">Sign out</a></mat-list-item>
     </mat-list>
   </mat-sidenav>
 
