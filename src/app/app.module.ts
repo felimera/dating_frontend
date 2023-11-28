@@ -44,6 +44,7 @@ import { AppointmentConfirmComponent } from './modules/appointment/component/app
 import { AppointmentEditComponent } from './modules/appointment/dialog/appointment-edit/appointment-edit.component';
 import { UserEditComponent } from './modules/user/component/user-edit/user-edit.component';
 import { UserPasswordComponent } from './modules/user/component/user-password/user-password.component';
+import { AppointmentReviewComponent } from './modules/appointment/component/appointment-review/appointment-review.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { UserPasswordComponent } from './modules/user/component/user-password/us
     AppointmentConfirmComponent,
     AppointmentEditComponent,
     UserEditComponent,
-    UserPasswordComponent
+    UserPasswordComponent,
+    AppointmentReviewComponent
   ],
   imports: [
     BrowserModule,

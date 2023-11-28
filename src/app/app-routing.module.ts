@@ -8,6 +8,7 @@ import { AppointmentConfirmComponent } from './modules/appointment/component/app
 import { AppointmentEditComponent } from './modules/appointment/dialog/appointment-edit/appointment-edit.component';
 import { UserEditComponent } from './modules/user/component/user-edit/user-edit.component';
 import { UserPasswordComponent } from './modules/user/component/user-password/user-password.component';
+import { AppointmentReviewComponent } from './modules/appointment/component/appointment-review/appointment-review.component';
 
 const routes: Routes = [
   { path: "home", component: ListAssignmentComponent },
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: "user-password", component: UserPasswordComponent },
   { path: "appointment-create", component: AppointmentCreateComponent },
   { path: "appointment-confirm", component: AppointmentConfirmComponent },
+  { path: "appointment-review", component: AppointmentReviewComponent },
   { path: "appointment-edit-dialog", component: AppointmentEditComponent }
 ];
 
