@@ -19,6 +19,8 @@ export class AppointmentCreateComponent implements OnInit {
 
   selected?: Date | null;
   pipe = new DatePipe('en-US');
+  minDate?: Date;
+  maxDate?: Date;
 
   appointmentForm: FormGroup<any> | any;
 
@@ -57,6 +59,15 @@ export class AppointmentCreateComponent implements OnInit {
     });
 
     this.customer = JSON.parse(this.cookieService.get('usuario'));
+    this.limitesFechaSeleccionada();
+  }
+
+  limitesFechaSeleccionada(): void {
+    const currentYear = new Date().getFullYear();
+    const currentDay = new Date().getDate();
+    const currentMonth = new Date().getMonth();
+    this.minDate = new Date(currentYear - 0, currentMonth, currentDay + 1);
+    this.maxDate = new Date(currentYear + 0, currentMonth + 1, 31);
   }
 
   fechaCita(): string {
