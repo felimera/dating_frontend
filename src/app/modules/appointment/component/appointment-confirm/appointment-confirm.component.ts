@@ -49,8 +49,8 @@ export class AppointmentConfirmComponent implements OnInit {
     this.appointmentTableService
       .getAppointmentByIdCustomer(this.custumer!.id)
       .subscribe({
-        next:
-          (appTable: AppointmentTable[]) => {
+        next: (appTable: AppointmentTable[]) => {
+          if (appTable) {
             appTable.forEach(app => {
               this.dataTableDTO = [];
               app.contentTableList.forEach(element => {
@@ -59,8 +59,8 @@ export class AppointmentConfirmComponent implements OnInit {
               this.dataAppTableDTO.push({ idAppointment: app.idAppointment, fecha: app.fecha, fechaSinFor: app.fechaSinFor, horaSinFor: app.horaSinFor, precioTotal: app.precioTotal, contentTableList: this.dataTableDTO });
             })
             this.dataSource = this.dataAppTableDTO;
-          },
-        error: error => console.log(error)
+          }
+        }
       })
   }
 
