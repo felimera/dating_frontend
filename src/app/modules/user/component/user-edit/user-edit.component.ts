@@ -19,13 +19,19 @@ export class UserEditComponent implements OnInit {
   hide = true;
 
   pipe = new DatePipe('en-US');
+  maxDate!: Date;
 
   constructor(
     private cookieService: CookieService,
     private customerService: CustomerService,
     private toasterService: ToasterService,
     private router: Router
-  ) { }
+  ) {
+    const currentYear = new Date().getFullYear();
+    const currentMonth = new Date().getMonth();
+    const currentDay = new Date().getDate();
+    this.maxDate = new Date(currentYear, currentMonth, currentDay - 1);
+  }
 
   ngOnInit(): void {
     this.usuario = JSON.parse(this.cookieService.get('usuario'));

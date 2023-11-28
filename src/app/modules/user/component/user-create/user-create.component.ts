@@ -13,12 +13,18 @@ import { ToasterService } from 'src/app/infrastructure/services/generally/toaste
 export class UserCreateComponent implements OnInit {
   userForm!: FormGroup;
   hide = true;
+  maxDate!: Date;
 
   constructor(
     private userSignupService: UserSignupService,
     private router: Router,
     private toasterService: ToasterService
-  ) { }
+  ) {
+    const currentYear = new Date().getFullYear();
+    const currentMonth = new Date().getMonth();
+    const currentDay = new Date().getDate();
+    this.maxDate = new Date(currentYear, currentMonth, currentDay - 1);
+  }
 
   pipe = new DatePipe('en-US');
 
