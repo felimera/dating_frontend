@@ -23,7 +23,9 @@ export class AppComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.customer = JSON.parse(this.cookieService.get('usuario'));
+    if (this.cookieService.check('usuario')) {
+      this.customer = JSON.parse(this.cookieService.get('usuario'));
+    }
   }
 
   isExistUser(): boolean {
