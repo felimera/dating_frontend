@@ -1,0 +1,99 @@
+.container {
+  background-color: white;
+  display: grid;
+  place-items: center;
+}
+
+#title-table {
+  text-align: center;
+}
+
+#title-table h1 {
+  font-size: 15;
+  font-weight: bold;
+}
+
+#container-panel {
+  width: 80%;
+}
+
+#filter-panel {
+  display: flex;
+  width: auto;
+  height: 5rem;
+}
+
+#search {
+  width: 30%;
+  display: flex;
+}
+
+#search mat-form-field {
+  border-radius: 5px;
+  width: 85%;
+  height: 90%;
+  font-size: 16px;
+  padding: 1px 1px;
+}
+
+#search button {
+  float: right;
+  margin-top: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+#filter {
+  width: 30%;
+}
+
+#filter mat-form-field {
+  width: 100%;
+}
+
+#editing-panel {
+  background-color: #eff6fb;
+  border-radius: 5px;
+  height: 3rem;
+  text-align: right;
+}
+
+#editing-panel button {
+  /* float: right; */
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: 5px;
+}
+
+#button-edit {
+  background-color: #2E7D32;
+}
+
+#button-delete {
+  margin-right: 5px;
+}
+
+
+.text-justify {
+  text-align: justify;
+}
+
+.text-rigth {
+  text-align: right;
+  width: 8rem;
+}
+
+.text-center {
+  text-align: center;
+  font-weight: bold;
+}
+
+.container-button {
+  display: table-cell;
+  display: grid;
+  display: inline-table;
+}
+
+.container-button button {
+  margin-left: .4rem;
+}

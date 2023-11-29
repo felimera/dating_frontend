@@ -1,1 +1,84 @@
-<p>appointment-review works!</p>
+<div class="container">
+
+  <div id="title-table">
+    <h1>Appointments assigned</h1>
+  </div>
+  <div id="container-panel">
+    <div id="filter-panel">
+      <div id="search">
+        <mat-form-field>
+          <input type="text" matInput placeholder="Nombre del cliente">
+        </mat-form-field>
+        <button mat-mini-fab color="primary" aria-label="Example icon button with a filter list icon">
+          <mat-icon>search</mat-icon>
+        </button>
+      </div>
+      <div id="filter">
+        <mat-form-field>
+          <mat-label>Meses del año</mat-label>
+          <mat-select>
+            <mat-option *ngFor="let elem of elementFilters" [value]="elem.value">{{elem.viewValue}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <mat-accordion *ngFor="let item of dataSource">
+      <div id="editing-panel">
+        <div id="button">
+          <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon">
+            <mat-icon>save</mat-icon>
+          </button>
+          <button id="button-edit" mat-mini-fab aria-label="Example icon button with a menu icon">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button id="button-delete" mat-mini-fab color="warn" aria-label="Example icon button with a menu icon">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+      <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+
+        <mat-expansion-panel-header>
+          <div><span>{{item.fecha}}</span></div>
+          <div>Precio total <span>{{item.precioTotal}}</span></div>
+        </mat-expansion-panel-header>
+
+        <table mat-table class="mat-elevation-z8" [dataSource]="item.contentTableList">
+
+          <ng-container matColumnDef="name">
+            <th class="text-center" mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell class="text-justify" *matCellDef="let element"> {{element.nombre}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="description">
+            <th class="text-center" mat-header-cell *matHeaderCellDef> Description </th>
+            <td mat-cell class="text-justify" *matCellDef="let element"> {{element.descripcion}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="price">
+            <th class="text-center" mat-header-cell *matHeaderCellDef> Price </th>
+            <td mat-cell class="text-rigth" *matCellDef="let element"> {{element.precio}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="symbol">
+            <th class="text-center" mat-header-cell *matHeaderCellDef> Symbol </th>
+            <td mat-cell class="text-rigth" *matCellDef="let element">
+              <div class="container-button">
+                <button mat-mini-fab color="primary" aria-label="Example icon button with a plus one icon">
+                  <mat-icon>change_circle</mat-icon>
+                </button>
+                <button mat-mini-fab color="accent" aria-label="Example icon button with a plus one icon">
+                  <mat-icon>cancel</mat-icon>
+                </button>
+              </div>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+</div>
