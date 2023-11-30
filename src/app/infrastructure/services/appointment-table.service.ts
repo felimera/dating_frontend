@@ -18,8 +18,17 @@ export class AppointmentTableService {
       .pipe(map((apiAppointmentTable) => apiAppointmentTable.map(AppointmentTableMapper.fromApiToDomain)));
   }
 
-  getConsultQuoteWithAnyFilters(valid: string): Observable<Array<AppointmentTable>> {
-    return this.http.get<Array<AppointmentTable>>(`${this.apiUrl}/anyfilter?valid=${valid}`)
+  getConsultQuoteWithAnyFilters(valid?: string, nameCustomer?: String): Observable<Array<AppointmentTable>> {
+    let url = "/anyfilter?";
+    if (valid)
+      url = url + `valid=${valid}`;
+    if (nameCustomer) {
+      if (valid) {
+        url = url + '&';
+      }
+      url = url + `nameCustomer=${nameCustomer}`
+    }
+    return this.http.get<Array<AppointmentTable>>(this.apiUrl + url)
       .pipe(map((apiAppointmentTable) => apiAppointmentTable.map(AppointmentTableMapper.fromApiToDomain)));
   }
 }

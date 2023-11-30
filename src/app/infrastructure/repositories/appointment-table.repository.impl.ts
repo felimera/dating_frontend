@@ -15,7 +15,7 @@ export class AppointmentTableRepository implements AppointmentTableRepository {
     return this.appointmentTableService.getAppointmentByIdCustomer(idCustomer);
   }
 
-  getConsultQuoteWithAnyFilters(valid: string): Observable<AppointmentTable[]> {
-    return this.appointmentTableService.getConsultQuoteWithAnyFilters(valid);
+  getConsultQuoteWithAnyFilters(valid?: string, nameCustomer?: string): Observable<AppointmentTable[]> {
+    return this.appointmentTableService.getConsultQuoteWithAnyFilters(valid, nameCustomer);
   }
 }
