@@ -47,6 +47,7 @@ import { UserPasswordComponent } from './modules/user/component/user-password/us
 import { AppointmentReviewComponent } from './modules/appointment/component/appointment-review/appointment-review.component';
 
 import { FormsModule } from '@angular/forms';
+import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
   declarations: [
@@ -87,6 +88,7 @@ import { FormsModule } from '@angular/forms';
     MatDialogModule,
     MatCheckboxModule,
     FormsModule,
+    MatRadioModule,
     ToastrModule.forRoot({
       timeOut: 3000, // Time to close the toaster (in milliseconds)
       positionClass: 'toast-top-right', // Toast position
