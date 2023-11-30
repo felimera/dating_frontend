@@ -46,6 +46,8 @@ import { UserEditComponent } from './modules/user/component/user-edit/user-edit.
 import { UserPasswordComponent } from './modules/user/component/user-password/user-password.component';
 import { AppointmentReviewComponent } from './modules/appointment/component/appointment-review/appointment-review.component';
 
+import { FormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -84,6 +86,7 @@ import { AppointmentReviewComponent } from './modules/appointment/component/appo
     MatTableModule,
     MatDialogModule,
     MatCheckboxModule,
+    FormsModule,
     ToastrModule.forRoot({
       timeOut: 3000, // Time to close the toaster (in milliseconds)
       positionClass: 'toast-top-right', // Toast position
