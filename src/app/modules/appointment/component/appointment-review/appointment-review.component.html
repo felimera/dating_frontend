@@ -5,29 +5,43 @@
   </div>
   <div id="container-panel">
     <div id="filter-panel">
-      <div id="search">
-        <mat-form-field>
-          <input type="text" matInput placeholder="Nombre del cliente">
-        </mat-form-field>
-        <button mat-mini-fab color="primary" aria-label="Example icon button with a filter list icon">
-          <mat-icon>search</mat-icon>
-        </button>
-      </div>
       <div id="filter">
         <mat-form-field>
           <mat-label>Meses del año</mat-label>
           <mat-select>
-            <mat-option *ngFor="let elem of elementFilters" [value]="elem.value">{{elem.viewValue}}</mat-option>
+            <mat-option *ngFor="let elem of entityGenericMonths" [value]="elem.id"
+              (click)="onFilterMonth(elem.id)">{{elem.value}}</mat-option>
           </mat-select>
         </mat-form-field>
+      </div>
+      <div id="search">
+        <mat-form-field>
+          <mat-label>Nombre del cliente</mat-label>
+          <input matInput type="text" [(ngModel)]="nameCustomerValue">
+          <button matSuffix mat-icon-button aria-label="Clear" (click)="nameCustomerValue=''">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Tipo de registro</mat-label>
+          <mat-select [(ngModel)]="validValue">
+            <mat-option *ngFor="let elem of entityGenericTypes" [value]="elem.id">{{elem.value}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <button mat-mini-fab color="primary" aria-label="Example icon button with a filter list icon"
+          (click)="onSearchData()">
+          <mat-icon>search</mat-icon>
+        </button>
+        <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon" routerLink="/home">
+          <mat-icon>save</mat-icon>
+        </button>
       </div>
     </div>
     <mat-accordion *ngFor="let item of dataSource">
       <div id="editing-panel">
         <div id="button">
-          <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon">
-            <mat-icon>save</mat-icon>
-          </button>
           <button id="button-edit" mat-mini-fab aria-label="Example icon button with a menu icon">
             <mat-icon>edit</mat-icon>
           </button>
@@ -39,8 +53,9 @@
       <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
 
         <mat-expansion-panel-header>
-          <div><span>{{item.fecha}}</span></div>
-          <div>Precio total <span>{{item.precioTotal}}</span></div>
+          <div class="paragraph"><span>{{item.fecha}}</span></div>
+          <div class="paragraph">Precio total <span>{{item.precioTotal}}</span></div>
+          <div class="paragraph">Fillname <span>{{item.fillNameCustomer}}</span></div>
         </mat-expansion-panel-header>
 
         <table mat-table class="mat-elevation-z8" [dataSource]="item.contentTableList">

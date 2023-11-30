@@ -23,8 +23,17 @@
   height: 5rem;
 }
 
-#search {
+#filter {
   width: 30%;
+  margin-right: 10px;
+}
+
+#filter mat-form-field {
+  width: 100%;
+}
+
+#search {
+  width: 70%;
   display: flex;
 }
 
@@ -40,15 +49,6 @@
   margin-top: 5px;
   margin-left: 5px;
   margin-right: 5px;
-}
-
-#filter {
-  width: 30%;
-  margin-right: 10px;
-}
-
-#filter mat-form-field {
-  width: 100%;
 }
 
 #editing-panel {
@@ -73,6 +73,14 @@
   margin-right: 5px;
 }
 
+.paragraph {
+  margin-right: 7px;
+  font-weight: 500;
+}
+
+.paragraph span {
+  font-weight: bolder;
+}
 
 .text-justify {
   text-align: justify;
