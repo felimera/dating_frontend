@@ -21,7 +21,7 @@
 
   <mat-sidenav [(opened)]="opened" mode="side">
     <mat-list>
-      <mat-list-item> <a routerLink="/home"> Home </a> </mat-list-item>
+      <mat-list-item *ngIf="!validarTipoUsuario()"> <a routerLink="/home"> Home </a> </mat-list-item>
 
       <ng-template [ngIf]="validarTipoUsuario()">
         <mat-list-item><a routerLink="/appointment-review">Review appointments</a></mat-list-item>
