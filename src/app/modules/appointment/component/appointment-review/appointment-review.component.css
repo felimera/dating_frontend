@@ -31,7 +31,6 @@
 #search mat-form-field {
   border-radius: 5px;
   width: 85%;
-  height: 90%;
   font-size: 16px;
   padding: 1px 1px;
 }
@@ -45,6 +44,7 @@
 
 #filter {
   width: 30%;
+  margin-right: 10px;
 }
 
 #filter mat-form-field {
