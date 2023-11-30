@@ -7,6 +7,9 @@ export class AppointmentTable {
     public fechaSinFor: string,
     public horaSinFor: string,
     public precioTotal: number,
-    public contentTableList: Array<ContentTable>
+    public contentTableList: Array<ContentTable>,
+    public idMonth?: string,
+    public month?: string,
+    public fillNameCustomer?: string
   ) { }
 }

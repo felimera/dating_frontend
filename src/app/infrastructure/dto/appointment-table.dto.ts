@@ -6,5 +6,8 @@ export interface AppointmentTableDTO {
   fechaSinFor: string,
   horaSinFor: string,
   precioTotal: number,
-  contentTableList: Array<ContentTableDTO>
+  contentTableList: Array<ContentTableDTO>,
+  idMonth?: string,
+  month?: string,
+  fillNameCustomer?: string
 }

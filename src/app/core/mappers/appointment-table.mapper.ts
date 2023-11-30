@@ -9,7 +9,10 @@ export class AppointmentTableMapper {
       fechaSinFor: apiAppointmentTable.fechaSinFor,
       horaSinFor: apiAppointmentTable.horaSinFor,
       precioTotal: apiAppointmentTable.precioTotal,
-      contentTableList: apiAppointmentTable.contentTableList
+      contentTableList: apiAppointmentTable.contentTableList,
+      idMonth: apiAppointmentTable.idMonth,
+      month: apiAppointmentTable.month,
+      fillNameCustomer: apiAppointmentTable.fillNameCustomer
     };
   }
 
@@ -20,7 +23,10 @@ export class AppointmentTableMapper {
       fechaSinFor: domainAppointmentTable.fechaSinFor,
       horaSinFor: domainAppointmentTable.horaSinFor,
       precioTotal: domainAppointmentTable.precioTotal,
-      contentTableList: domainAppointmentTable.contentTableList
+      contentTableList: domainAppointmentTable.contentTableList,
+      idMonth: domainAppointmentTable.idMonth,
+      month: domainAppointmentTable.month,
+      fillNameCustomer: domainAppointmentTable.fillNameCustomer
     };
   }
 }
