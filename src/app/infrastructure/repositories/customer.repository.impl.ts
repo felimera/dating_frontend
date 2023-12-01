@@ -18,4 +18,8 @@ export class CustomerRepositoryImpl implements CustomerRepository {
   putCustomer(id: number, customer: Customer): Observable<Customer> {
     return this.customerService.putCustomer(id, customer);
   }
+
+  getAnyCustomerWithQueryParameters(id?: number, fillName?: string, email?: string): Observable<Customer[]> {
+    return this.customerService.getAnyCustomerWithQueryParameters(id, fillName, email);
+  }
 }

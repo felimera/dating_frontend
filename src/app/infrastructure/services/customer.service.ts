@@ -23,4 +23,26 @@ export class CustomerService {
     return this.http
       .put<Customer>(`${this.apiUrl}/${id}`, customer);
   }
+
+  getAnyCustomerWithQueryParameters(id?: number, fillName?: string, email?: string): Observable<Customer[]> {
+    let url = this.apiUrl + 'anyfilter?';
+    if (id) {
+      url = url + 'id=' + id;
+    }
+    if (fillName) {
+      if (id) {
+        url = url + '&'
+      }
+      url = url + 'fillName=' + fillName;
+    }
+    if (email) {
+      if (id || fillName) {
+        url = url + '&';
+      }
+      url = url + 'email=' + email;
+    }
+    return this.http
+      .get<Customer[]>(url)
+      .pipe(map((apiCustomer) => apiCustomer.map(CustomerMapper.fromApiToDomain)));
+  }
 }
