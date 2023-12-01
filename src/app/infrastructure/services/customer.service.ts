@@ -25,7 +25,7 @@ export class CustomerService {
   }
 
   getAnyCustomerWithQueryParameters(id?: number, fillName?: string, email?: string): Observable<Customer[]> {
-    let url = this.apiUrl + 'anyfilter?';
+    let url = this.apiUrl + '/anyfilter?';
     if (id) {
       url = url + 'id=' + id;
     }
