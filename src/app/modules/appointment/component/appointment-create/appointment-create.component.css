@@ -1,3 +1,53 @@
+#container-client {
+  width: 80%;
+  margin: auto;
+  margin-bottom: 10px;
+  background-color: #f3f7fa;
+  border-radius: 5px;
+}
+
+#container-client h2 {
+  text-align: center;
+  font-weight: bolder;
+}
+
+.row-panel {
+  width: 100%;
+}
+
+.left-panel {
+  text-align: left;
+  width: 48%;
+}
+
+.right-panel {
+  width: 48%;
+}
+
+.right-panel p {
+  width: 100%;
+  font-weight: 500;
+}
+
+.right-panel p span {
+  font-weight: bolder;
+}
+
+.panel-search {
+  display: flex;
+  justify-content: space-between;
+}
+
+.panel-search mat-form-field {
+  width: 100%;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.panel-search button {
+  margin-right: 5px;
+}
+
 .container-row {
   width: 700px;
   margin: auto;
@@ -8,6 +58,24 @@
   /*Con esto le indicamos que margine todos los items que se encuentra adentro hacia la derecha e izquierda*/
   align-items: center;
   /*con esto alineamos de manera vertical*/
+}
+
+.column-container {
+  width: 100%;
+}
+
+.radio-button {
+  display: flex;
+  width: 100%;
+}
+
+.column-container p {
+  font-weight: 500;
+}
+
+.column-container p span {
+  margin-left: 5px;
+  font-weight: bolder;
 }
 
 .rigth-container {

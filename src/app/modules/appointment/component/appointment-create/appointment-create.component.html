@@ -1,3 +1,51 @@
+<div id="container-client" *ngIf="isRolAdmin()">
+  <h2>Informacion del cliente</h2>
+  <div class="row-panel">
+    <div class="panel-search">
+      <mat-form-field>
+        <mat-label>Identificacion del cliente</mat-label>
+        <input matInput type="text" [(ngModel)]="idCustomerValue">
+        <button matSuffix mat-icon-button aria-label="Clear" (click)="idCustomerValue=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Nombre del cliente</mat-label>
+        <input matInput type="text" [(ngModel)]="nameCustomerValue">
+        <button matSuffix mat-icon-button aria-label="Clear" (click)="nameCustomerValue=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Correo del cliente</mat-label>
+        <input matInput type="text" [(ngModel)]="emailCustomerValue">
+        <button matSuffix mat-icon-button aria-label="Clear" (click)="emailCustomerValue=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+      <button mat-fab extended color="primary" (click)="onSearchCustomerParameter()" [disabled]="isEnableBottoSerach()">
+        <mat-icon>search</mat-icon>
+        Consultar
+      </button>
+    </div>
+
+    <div class="row-panel panel-search">
+
+      <div class="left-panel">
+        <div class="column-container">
+          <mat-radio-group aria-labelledby="example-radio-group-label" [(ngModel)]="fillNameCustomerDTO"
+            *ngFor="let elem of customers">
+            <mat-radio-button class="radio-button" [value]="elem">{{elem.nombre +' '+elem.apellido}}</mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </div>
+
+      <div class="right-panel">
+        <p>Nombre cliente :<span>{{onFillNameCustomer()}}</span></p>
+      </div>
+    </div>
+  </div>
+</div>
 <form [formGroup]="appointmentForm">
   <div class="container-row">
 
@@ -14,9 +62,10 @@
           <input id="appt-time" type="time" matInput name="appt-time" formControlName="hora" />
         </mat-list-item>
         <mat-divider></mat-divider>
-        <mat-list-item>Nombre : {{customer.nombre +' '+ customer.apellido}} </mat-list-item>
+        <mat-list-item>Nombre : {{onFillNameCustomer()}} </mat-list-item>
         <mat-divider></mat-divider>
-        <mat-list-item>Telefono y correo : {{customer.telefono}} {{customer.correo}} </mat-list-item>
+        <mat-list-item>Telefono y correo : {{fillNameCustomerDTO?.telefono}} {{fillNameCustomerDTO?.correo}}
+        </mat-list-item>
         <mat-divider></mat-divider>
         <mat-list-item>Fecha de la Cita : {{fechaCita()}}</mat-list-item>
       </mat-list>

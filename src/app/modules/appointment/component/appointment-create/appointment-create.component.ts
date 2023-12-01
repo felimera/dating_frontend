@@ -10,6 +10,8 @@ import { CookieService } from 'ngx-cookie-service';
 import { AppointmentService } from 'src/app/infrastructure/services/appointment.service';
 import { ToasterService } from 'src/app/infrastructure/services/generally/toaster.service';
 import { Assignment } from 'src/app/core/models/assignment.model';
+import { CustomerService } from 'src/app/infrastructure/services/customer.service';
+import { Customer } from 'src/app/core/models/customer.model';
 
 @Component({
   selector: 'app-appointment-create',
@@ -22,6 +24,11 @@ export class AppointmentCreateComponent implements OnInit {
   pipe = new DatePipe('en-US');
   minDate?: Date;
   maxDate?: Date;
+  idCustomerValue: string = '';
+  nameCustomerValue: string = '';
+  emailCustomerValue: string = '';
+
+  fillNameCustomerDTO: CustomerDTO | any;
 
   appointmentForm: FormGroup<any> | any;
 
@@ -31,6 +38,8 @@ export class AppointmentCreateComponent implements OnInit {
   customer: CustomerDTO | any;
   displayedColumns: string[] = ['nombre', 'precio'];
 
+  customers: CustomerDTO[] = [];
+
   constructor(
     private dateAdapter: DateAdapter<Date>,
     private activatedRoute: ActivatedRoute,
@@ -38,7 +47,8 @@ export class AppointmentCreateComponent implements OnInit {
     private cookieService: CookieService,
     private appointmentService: AppointmentService,
     private toasterService: ToasterService,
-    private router: Router
+    private router: Router,
+    private customerService: CustomerService
   ) {
     this.dateAdapter.setLocale('Es');
   }
@@ -47,11 +57,14 @@ export class AppointmentCreateComponent implements OnInit {
 
     this.customer = JSON.parse(this.cookieService.get('usuario'));
 
+    if (this.customer.rol[0] !== 'A')
+      this.fillNameCustomerDTO = this.customer;
+
     this.appointmentForm = new FormGroup({
       fecha: new FormControl('', [Validators.required]),
       hora: new FormControl('', [Validators.required]),
       precioTotal: new FormControl('', [Validators.required]),
-      idCustomer: new FormControl(this.customer.id, [Validators.required]),
+      idCustomer: new FormControl('', [Validators.required]),
       idsAssignment: new FormControl('', [Validators.required])
     });
 
@@ -98,6 +111,7 @@ export class AppointmentCreateComponent implements OnInit {
 
     this.appointmentForm.get('fecha')!.setValue(fechaFormateada);
     this.appointmentForm.get('precioTotal')!.setValue(this.priceTotal);
+    this.appointmentForm.get('idCustomer')!.setValue(this.fillNameCustomerDTO?.id);
 
     this.appointmentService
       .postAppointment(this.appointmentForm.value)
@@ -113,5 +127,33 @@ export class AppointmentCreateComponent implements OnInit {
           }
         }, error: error => console.error('error', error)
       })
+  }
+
+  isRolAdmin(): boolean {
+    return this.customer.rol[0] === 'A';
+  }
+
+  onSearchCustomerParameter(): void {
+    this.customerService
+      .getAnyCustomerWithQueryParameters(Number(this.idCustomerValue), this.nameCustomerValue, this.emailCustomerValue)
+      .subscribe({
+        next: (res: Customer[]) => {
+          if (res) {
+            this.customers = res
+          }
+        },
+        error: res => console.log(res.error)
+      })
+  }
+
+  isEnableBottoSerach(): boolean {
+    return this.idCustomerValue.trim().length == 0 && this.nameCustomerValue.trim().length == 0 && this.emailCustomerValue.trim().length == 0;
+  }
+
+  onFillNameCustomer(): string {
+    if (this.fillNameCustomerDTO) {
+      return this.fillNameCustomerDTO?.nombre + ' ' + this.fillNameCustomerDTO?.apellido;
+    }
+    return '';
   }
 }
