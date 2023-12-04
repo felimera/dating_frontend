@@ -1,6 +1,6 @@
 import { Observable } from "rxjs";
 import { Appointment } from "../models/appointment.model";
-import { EntityGeneric } from "../models/entity-generic.model";
+import { MessageGenericDTO } from "src/app/infrastructure/dto/message-generic.dto";
 
 export abstract class AppointmentRepository {
   abstract postAppointment(appointment: Appointment): Observable<Appointment>;
@@ -8,5 +8,5 @@ export abstract class AppointmentRepository {
   abstract getById(idAppointment: number): Observable<Appointment>;
   abstract deleteAppointmentByAssignment(appointment: Appointment): Observable<any>;
   abstract putAdminAppointment(idAppointment: number, appointment: Appointment): Observable<Appointment>;
-  abstract deleteAppointment(idAppointment: number): Observable<EntityGeneric>;
+  abstract deleteAppointment(idAppointment: number): Observable<MessageGenericDTO>;
 }

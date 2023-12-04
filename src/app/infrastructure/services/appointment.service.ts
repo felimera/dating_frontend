@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Appointment } from 'src/app/core/models/appointment.model';
-import { EntityGeneric } from 'src/app/core/models/entity-generic.model';
+import { MessageGenericDTO } from '../dto/message-generic.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -37,7 +37,7 @@ export class AppointmentService {
     return this.http.put<Appointment>(`${this.apiUrl}/admin/${idAppointment}`, appointment);
   }
 
-  deleteAppointment(idAppointment: number): Observable<EntityGeneric> {
-    return this.http.delete<EntityGeneric>(`${this.apiUrl}/${idAppointment}`);
+  deleteAppointment(idAppointment: number): Observable<MessageGenericDTO> {
+    return this.http.delete<MessageGenericDTO>(`${this.apiUrl}/${idAppointment}`);
   }
 }
