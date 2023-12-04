@@ -3,6 +3,7 @@ import { Observable } from "rxjs";
 import { AppointmentRepository } from "src/app/core/repositories/appointment.repository";
 import { AppointmentService } from "../services/appointment.service";
 import { Appointment } from "src/app/core/models/appointment.model";
+import { EntityGeneric } from "src/app/core/models/entity-generic.model";
 
 @Injectable({
   providedIn: 'root',
@@ -30,5 +31,9 @@ export class AppointmentRepositoryImpl implements AppointmentRepository {
 
   putAdminAppointment(idAppointment: number, appointment: Appointment): Observable<Appointment> {
     return this.appointmentService.putAdminAppointment(idAppointment, appointment);
+  }
+
+  deleteAppointment(idAppointment:number):Observable<EntityGeneric>{
+    return this.appointmentService.deleteAppointment(idAppointment);
   }
 }
