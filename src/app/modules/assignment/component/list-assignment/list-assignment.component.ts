@@ -10,6 +10,7 @@ import { AssignmentCardDialogComponent } from '../assignment-card-dialog/assignm
 import { DataElement } from 'src/app/infrastructure/dto/data-table.dto';
 import { CookieService } from 'ngx-cookie-service';
 import { ToasterService } from 'src/app/infrastructure/services/generally/toaster.service';
+import { DialogDataGenericDTO } from 'src/app/infrastructure/dto/dialog-data-generic.dto';
 
 @Component({
   selector: 'app-list-assignment',
@@ -60,7 +61,7 @@ export class ListAssignmentComponent implements OnInit {
         data: { valid: this.valid },
       });
 
-      dialogRef.afterClosed().subscribe(result => {
+      dialogRef.afterClosed().subscribe((result:DialogDataGenericDTO) => {
         this.valid = result.valid
         if (this.valid)
           this.router.navigateByUrl('/login');

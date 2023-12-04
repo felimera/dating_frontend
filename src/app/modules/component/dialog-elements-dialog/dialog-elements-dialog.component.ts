@@ -1,9 +1,6 @@
-import { Component, Inject, NgModule } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-
-export interface DialogData {
-  valid: boolean
-}
+import { Component, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { DialogDataGenericDTO } from 'src/app/infrastructure/dto/dialog-data-generic.dto';
 
 @Component({
   selector: 'app-dialog-elements-dialog',
@@ -14,8 +11,7 @@ export interface DialogData {
 export class DialogElementsDialogComponent {
 
   constructor(
-    public dialogRef: MatDialogRef<DialogElementsDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    @Inject(MAT_DIALOG_DATA) public data: DialogDataGenericDTO,
   ) { }
 
   onValid(): void {

@@ -9,6 +9,7 @@ import { AppointmentService } from 'src/app/infrastructure/services/appointment.
 import { ToasterService } from 'src/app/infrastructure/services/generally/toaster.service';
 import { CustomerDTO } from 'src/app/infrastructure/dto/customer.dto';
 import { CookieService } from 'ngx-cookie-service';
+import { AppointmentTableDTO } from 'src/app/infrastructure/dto/appointment-table.dto';
 
 @Component({
   selector: 'app-appointment-edit',
@@ -24,13 +25,14 @@ export class AppointmentEditComponent implements OnInit {
   priceAppointment: string | undefined;
   fechaAppointment: string | undefined;
   horaAppointment: string | undefined;
+  idCustomer: number | undefined;
 
   pipe = new DatePipe('en-US');
 
 
   constructor(
     public dialogRef: MatDialogRef<AppointmentEditComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
+    @Inject(MAT_DIALOG_DATA) public data: AppointmentTableDTO,
     private dateAdapter: DateAdapter<Date>,
     private appointmentService: AppointmentService,
     private toasterService: ToasterService,
@@ -42,10 +44,11 @@ export class AppointmentEditComponent implements OnInit {
   ngOnInit(): void {
     this.customer = JSON.parse(this.cookieService.get('usuario'));
 
-    this.idAppointment = this.data.id;
-    this.priceAppointment = this.data.price;
-    this.fechaAppointment = this.data.fecha;
-    this.horaAppointment = this.data.hora;
+    this.idAppointment = this.data.idAppointment;
+    this.priceAppointment = this.data.precioTotal.toString();
+    this.fechaAppointment = this.data.fechaSinFor;
+    this.horaAppointment = this.data.horaSinFor;
+    this.idCustomer = this.data.idCustomer;
 
     const fechaFormateada = this.pipe.transform(this.fechaAppointment, 'MM-dd-yyyy');
 
@@ -70,19 +73,34 @@ export class AppointmentEditComponent implements OnInit {
     const fechaFormateada = this.pipe.transform(fechaSelected, 'dd/MM/yyyy');
     this.appointmentForm.get('fecha')!.setValue(fechaFormateada);
     this.appointmentForm.get('precioTotal')!.setValue(this.clearPriceFormat(this.priceAppointment));
-    this.appointmentForm.get('idCustomer')!.setValue(this.customer.id);
 
-    this.appointmentService.putAppointment(this.idAppointment!, this.appointmentForm.value)
-      .subscribe({
-        next: (res: Appointment) => {
-          if (res) {
-            this.toasterService.success('Registro guardado exitosamente.', 'Appoinment edit')
-            setTimeout(() => {
-              this.onNoClick();
-            }, 1000);
+    if (this.customer.rol[0] === 'A') {
+      this.appointmentForm.get('idCustomer')!.setValue(this.idCustomer);
+      this.appointmentService.putAdminAppointment(this.idAppointment!, this.appointmentForm.value)
+        .subscribe({
+          next: (res: Appointment) => {
+            if (res) {
+              this.toasterService.success('Registro guardado exitosamente.', 'Appoinment edit')
+              setTimeout(() => {
+                this.onNoClick();
+              }, 1000);
+            }
           }
-        }
-      });
+        });
+    } else {
+      this.appointmentForm.get('idCustomer')!.setValue(this.customer.id);
+      this.appointmentService.putAppointment(this.idAppointment!, this.appointmentForm.value)
+        .subscribe({
+          next: (res: Appointment) => {
+            if (res) {
+              this.toasterService.success('Registro guardado exitosamente.', 'Appoinment edit')
+              setTimeout(() => {
+                this.onNoClick();
+              }, 1000);
+            }
+          }
+        });
+    }
   }
 
   onNoClick(): void {
