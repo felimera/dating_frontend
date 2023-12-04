@@ -42,10 +42,11 @@
     <mat-accordion *ngFor="let item of dataSource">
       <div id="editing-panel">
         <div id="button">
-          <button id="button-edit" mat-mini-fab aria-label="Example icon button with a menu icon">
+          <button id="button-edit" mat-mini-fab aria-label="Example icon button with a menu icon"
+            (click)="onEditarAppointment(item)">
             <mat-icon>edit</mat-icon>
           </button>
-          <button id="button-delete" mat-mini-fab color="warn" aria-label="Example icon button with a menu icon">
+          <button id="button-delete" mat-mini-fab color="warn" aria-label="Example icon button with a menu icon" (click)="onDeleteAppointment(item)">
             <mat-icon>delete</mat-icon>
           </button>
         </div>

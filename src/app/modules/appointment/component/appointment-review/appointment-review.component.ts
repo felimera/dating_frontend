@@ -9,6 +9,10 @@ import { EntityGenericDTO } from 'src/app/infrastructure/dto/entity-generic.dto'
 import { AppointmentTableService } from 'src/app/infrastructure/services/appointment-table.service';
 import { EntityGenericService } from 'src/app/infrastructure/services/entity-generic.service';
 import { ToasterService } from 'src/app/infrastructure/services/generally/toaster.service';
+import { AppointmentEditComponent } from '../../dialog/appointment-edit/appointment-edit.component';
+import { MatDialog } from '@angular/material/dialog';
+import { AppointmentService } from 'src/app/infrastructure/services/appointment.service';
+import { MessageGenericDTO } from 'src/app/infrastructure/dto/message-generic.dto';
 
 @Component({
   selector: 'app-appointment-review',
@@ -40,7 +44,9 @@ export class AppointmentReviewComponent implements OnInit {
     private appointmentTableService: AppointmentTableService,
     private cookieService: CookieService,
     private entityGenericService: EntityGenericService,
-    private toasterService: ToasterService
+    private toasterService: ToasterService,
+    public dialog: MatDialog,
+    private appointmentService: AppointmentService
   ) { }
 
   ngOnInit(): void {
@@ -83,7 +89,7 @@ export class AppointmentReviewComponent implements OnInit {
                 app.contentTableList.forEach(element => {
                   this.dataTableDTO.push({ idAssignment: element.idAssignment, nombre: element.nombre, descripcion: element.descripcion, precio: element.precio })
                 })
-                this.dataAppTableDTO.push({ idAppointment: app.idAppointment, fecha: app.fecha, fechaSinFor: app.fechaSinFor, horaSinFor: app.horaSinFor, precioTotal: app.precioTotal, contentTableList: this.dataTableDTO, idMonth: app.idMonth, month: app.month, fillNameCustomer: app.fillNameCustomer });
+                this.dataAppTableDTO.push({ idAppointment: app.idAppointment, fecha: app.fecha, fechaSinFor: app.fechaSinFor, horaSinFor: app.horaSinFor, precioTotal: app.precioTotal, contentTableList: this.dataTableDTO, idMonth: app.idMonth, month: app.month, fillNameCustomer: app.fillNameCustomer, idCustomer: app.idCustomer });
               }
             })
             this.dataSource = this.dataAppTableDTO;
@@ -104,5 +110,34 @@ export class AppointmentReviewComponent implements OnInit {
   onFilterMonth(id: string): void {
     const listTableDTO: AppointmentTableDTO[] = this.dataAppTableDTO.filter(value => value.idMonth == id);
     this.dataSource = listTableDTO;
+  }
+
+  onEditarAppointment(app: AppointmentTableDTO): void {
+    const dialogRef = this.dialog.open(AppointmentEditComponent, {
+      height: '180px',
+      width: '500px',
+      data: { idAppointment: app.idAppointment, precioTotal: app.precioTotal, fechaSinFor: app.fechaSinFor, horaSinFor: app.horaSinFor, idCustomer: app.idCustomer }
+    });
+    dialogRef.afterClosed().subscribe(() => {
+      this.loadDataIntoTable();
+    });
+  }
+
+  onDeleteAppointment(app: AppointmentTableDTO): void {
+    if (confirm('¿Seguro desea eliminar este registro?')) {
+      this.appointmentService
+        .deleteAppointment(app.idAppointment)
+        .subscribe({
+          next: (res: MessageGenericDTO) => {
+            if (res) {
+              this.toasterService.info(res.message, 'Delete Appointmnet');
+              setTimeout(() => {
+                this.loadDataIntoTable();
+              }, 3000);
+            }
+          },
+          error: (res: any) => console.log(res.error.message)
+        })
+    }
   }
 }
