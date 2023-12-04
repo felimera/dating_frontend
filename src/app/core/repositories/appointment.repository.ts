@@ -6,4 +6,5 @@ export abstract class AppointmentRepository {
   abstract putAppointment(idAppointment: number, appointment: Appointment): Observable<Appointment>;
   abstract getById(idAppointment: number): Observable<Appointment>;
   abstract deleteAppointmentByAssignment(appointment: Appointment): Observable<any>;
+  abstract putAdminAppointment(idAppointment: number, appointment: Appointment): Observable<Appointment>;
 }

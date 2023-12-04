@@ -31,4 +31,8 @@ export class AppointmentService {
     };
     return this.http.delete<any>(`${this.apiUrl}/assignment`, options);
   }
+
+  putAdminAppointment(idAppointment: number, appointment: Appointment): Observable<Appointment> {
+    return this.http.put<Appointment>(`${this.apiUrl}/admin/${idAppointment}`, appointment);
+  }
 }

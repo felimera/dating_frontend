@@ -27,4 +27,8 @@ export class AppointmentRepositoryImpl implements AppointmentRepository {
   deleteAppointmentByAssignment(appointment: Appointment): Observable<any> {
     return this.appointmentService.deleteAppointmentByAssignment(appointment);
   }
+
+  putAdminAppointment(idAppointment: number, appointment: Appointment): Observable<Appointment> {
+    return this.appointmentService.putAdminAppointment(idAppointment, appointment);
+  }
 }
