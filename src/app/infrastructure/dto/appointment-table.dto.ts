@@ -9,5 +9,6 @@ export interface AppointmentTableDTO {
   contentTableList: Array<ContentTableDTO>,
   idMonth?: string,
   month?: string,
-  fillNameCustomer?: string
+  fillNameCustomer?: string,
+  idCustomer?:number
 }

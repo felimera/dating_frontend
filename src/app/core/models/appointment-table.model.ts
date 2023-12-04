@@ -10,6 +10,7 @@ export class AppointmentTable {
     public contentTableList: Array<ContentTable>,
     public idMonth?: string,
     public month?: string,
-    public fillNameCustomer?: string
+    public fillNameCustomer?: string,
+    public idCustomer?:number
   ) { }
 }

@@ -12,7 +12,8 @@ export class AppointmentTableMapper {
       contentTableList: apiAppointmentTable.contentTableList,
       idMonth: apiAppointmentTable.idMonth,
       month: apiAppointmentTable.month,
-      fillNameCustomer: apiAppointmentTable.fillNameCustomer
+      fillNameCustomer: apiAppointmentTable.fillNameCustomer,
+      idCustomer: apiAppointmentTable.idCustomer
     };
   }
 
@@ -26,7 +27,8 @@ export class AppointmentTableMapper {
       contentTableList: domainAppointmentTable.contentTableList,
       idMonth: domainAppointmentTable.idMonth,
       month: domainAppointmentTable.month,
-      fillNameCustomer: domainAppointmentTable.fillNameCustomer
+      fillNameCustomer: domainAppointmentTable.fillNameCustomer,
+      idCustomer: domainAppointmentTable.idCustomer
     };
   }
 }
