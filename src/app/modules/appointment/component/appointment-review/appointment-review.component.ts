@@ -13,6 +13,7 @@ import { AppointmentEditComponent } from '../../dialog/appointment-edit/appointm
 import { MatDialog } from '@angular/material/dialog';
 import { AppointmentService } from 'src/app/infrastructure/services/appointment.service';
 import { MessageGenericDTO } from 'src/app/infrastructure/dto/message-generic.dto';
+import { Appointment } from 'src/app/core/models/appointment.model';
 
 @Component({
   selector: 'app-appointment-review',
@@ -29,6 +30,8 @@ export class AppointmentReviewComponent implements OnInit {
 
   dataAppTableDTO: AppointmentTableDTO[] = [];
   dataTableDTO: ContentTableDTO[] = [];
+
+  appointment: Appointment | undefined;
 
   displayedColumns: string[] = ['name', 'description', 'price', 'symbol'];
   dataSource: any;
@@ -138,6 +141,28 @@ export class AppointmentReviewComponent implements OnInit {
           },
           error: (res: any) => console.log(res.error.message)
         })
+    }
+  }
+
+  onRemoveAssignment(app: AppointmentTableDTO, idAssignment: number): void {
+    if (confirm('¿Seguro deseas retirar este Assignment del Appointment?')) {
+      this.appointment = {
+        idCustomer: app.idCustomer,
+        fecha: app.fechaSinFor,
+        idAssignment: idAssignment
+      }
+
+      this.appointmentService
+        .deleteAppointmentByAssignment(this.appointment!)
+        .subscribe({
+          next: (res: any) => {
+            if (res) {
+              this.toasterService.success(res.message, 'Appoinment remove');
+              this.loadDataIntoTable();
+            }
+          },
+          error: res => console.log(res.error.message)
+        });
     }
   }
 }
