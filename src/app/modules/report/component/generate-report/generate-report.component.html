@@ -1,1 +1,69 @@
-<p>generate-report works!</p>
+<div class="container">
+
+  <div id="title">
+    <h1>Appointment Reports</h1>
+  </div>
+  <div class="container-search">
+    <mat-tab-group>
+      <mat-tab label="Generate it by customer.">
+        <div class="row-container">
+          <mat-form-field>
+            <mat-label>Nombre del cliente</mat-label>
+            <input matInput type="text" [(ngModel)]="nameCustomerValue">
+            <button matSuffix mat-icon-button aria-label="Clear" (click)="nameCustomerValue=''">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+
+          <button mat-fab color="primary" aria-label="Example icon button with a delete icon"
+            (click)="onSearchCustomerParameter()">
+            <mat-icon>search</mat-icon>
+          </button>
+        </div>
+
+        <div class="list-item">
+          <mat-list *ngFor="let elem of customers">
+            <mat-list-item :key="elem.id">
+              <div>
+                <p class="left">{{elem.nombre +' '+elem.apellido}}</p>
+                <button class="rigth" mat-mini-fab color="primary" aria-label="Example icon button with a menu icon"
+                  (click)="onGenerarReport(elem.id)">
+                  <mat-icon>print</mat-icon>
+                </button>
+              </div>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+          </mat-list>
+        </div>
+
+      </mat-tab>
+      <mat-tab label="Generate it by date range.">
+        <div class="row-container">
+
+          <mat-form-field>
+            <mat-label>Enter a date range</mat-label>
+            <mat-date-range-input [formGroup]="dateRange" [rangePicker]="picker">
+              <input matStartDate formControlName="start" placeholder="Start date">
+              <input matEndDate formControlName="end" placeholder="End date">
+            </mat-date-range-input>
+            <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+
+            <div *ngIf="dateRange.controls.start.hasError('matStartDateInvalid')">
+              <mat-error>Invalid start date</mat-error>
+            </div>
+            <div *ngIf="dateRange.controls.end.hasError('matEndDateInvalid')">
+              <mat-error>Invalid end date</mat-error>
+            </div>
+          </mat-form-field>
+
+          <button mat-fab color="primary" aria-label="Example icon button with a menu icon" (click)="onGenerarReport()">
+            <mat-icon>print</mat-icon>
+          </button>
+
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>

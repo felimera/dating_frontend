@@ -1,4 +1,10 @@
+import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { Customer } from 'src/app/core/models/customer.model';
+import { CustomerDTO } from 'src/app/infrastructure/dto/customer.dto';
+import { CustomerService } from 'src/app/infrastructure/services/customer.service';
+import { GenerateReportService } from 'src/app/infrastructure/services/report/generate-report.service';
 
 @Component({
   selector: 'app-generate-report',
@@ -7,4 +13,57 @@ import { Component } from '@angular/core';
 })
 export class GenerateReportComponent {
 
+  datePipe = new DatePipe('en-US');
+
+  nameCustomerValue: string = '';
+
+  fillNameCustomerDTO: CustomerDTO | any;
+
+  customers: CustomerDTO[] = [];
+
+  dateRange = new FormGroup({
+    start: new FormControl<Date | null>(null),
+    end: new FormControl<Date | null>(null),
+  });
+
+  constructor(
+    private customerService: CustomerService,
+    private generateReportService: GenerateReportService
+  ) { }
+
+  onSearchCustomerParameter(): void {
+    this.customerService
+      .getAnyCustomerWithQueryParameters(undefined, this.nameCustomerValue, undefined)
+      .subscribe({
+        next: (res: Customer[]) => {
+          if (res) {
+            this.customers = res
+          }
+        },
+        error: res => console.log(res.error)
+      })
+  }
+
+  getFormatDate(date: Date | null): string | undefined {
+    if (date) {
+      const fechaFormateada = this.datePipe.transform(date, 'yyyy-MM-dd');
+      console.log(fechaFormateada);
+      return fechaFormateada!;
+    }
+    else {
+      return undefined;
+    }
+  }
+
+  onGenerarReport(idCustomer?: number): void {
+    this.generateReportService
+      .getReportPdf(idCustomer, this.getFormatDate(this.dateRange.get('start')!.value), this.getFormatDate(this.dateRange.get('end')!.value))
+      .subscribe((res: any) => {
+        if (res) {
+          const file = new Blob([res], { type: 'application/pdf' });
+          const fileURL = URL.createObjectURL(file);
+          window.open(fileURL);
+        }
+      });
+  }
 }
