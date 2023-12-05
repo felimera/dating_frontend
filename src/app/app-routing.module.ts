@@ -9,6 +9,7 @@ import { AppointmentEditComponent } from './modules/appointment/dialog/appointme
 import { UserEditComponent } from './modules/user/component/user-edit/user-edit.component';
 import { UserPasswordComponent } from './modules/user/component/user-password/user-password.component';
 import { AppointmentReviewComponent } from './modules/appointment/component/appointment-review/appointment-review.component';
+import { GenerateReportComponent } from './modules/report/component/generate-report/generate-report.component';
 
 const routes: Routes = [
   { path: "home", component: ListAssignmentComponent },
@@ -19,7 +20,8 @@ const routes: Routes = [
   { path: "appointment-create", component: AppointmentCreateComponent },
   { path: "appointment-confirm", component: AppointmentConfirmComponent },
   { path: "appointment-review", component: AppointmentReviewComponent },
-  { path: "appointment-edit-dialog", component: AppointmentEditComponent }
+  { path: "appointment-edit-dialog", component: AppointmentEditComponent },
+  { path: "generate-report", component: GenerateReportComponent }
 ];
 
 @NgModule({

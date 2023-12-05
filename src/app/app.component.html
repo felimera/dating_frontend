@@ -25,7 +25,7 @@
 
       <ng-template [ngIf]="validarTipoUsuario()">
         <mat-list-item><a routerLink="/appointment-review">Review appointments</a></mat-list-item>
-        <mat-list-item><a routerLink="/">Generate appointment reports</a></mat-list-item>
+        <mat-list-item><a routerLink="/generate-report">Generate appointment reports</a></mat-list-item>
       </ng-template>
 
       <mat-list-item *ngIf="!isExistUser()"><a routerLink="/login">Login</a></mat-list-item>

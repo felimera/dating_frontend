@@ -48,6 +48,7 @@ import { AppointmentReviewComponent } from './modules/appointment/component/appo
 
 import { FormsModule } from '@angular/forms';
 import { MatRadioModule } from '@angular/material/radio';
+import { GenerateReportComponent } from './modules/report/component/generate-report/generate-report.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { MatRadioModule } from '@angular/material/radio';
     AppointmentEditComponent,
     UserEditComponent,
     UserPasswordComponent,
-    AppointmentReviewComponent
+    AppointmentReviewComponent,
+    GenerateReportComponent
   ],
   imports: [
     BrowserModule,
