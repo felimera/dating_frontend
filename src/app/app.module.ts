@@ -50,6 +50,8 @@ import { FormsModule } from '@angular/forms';
 import { MatRadioModule } from '@angular/material/radio';
 import { GenerateReportComponent } from './modules/report/component/generate-report/generate-report.component';
 
+import {MatTabsModule} from '@angular/material/tabs';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -91,6 +93,7 @@ import { GenerateReportComponent } from './modules/report/component/generate-rep
     MatCheckboxModule,
     FormsModule,
     MatRadioModule,
+    MatTabsModule,
     ToastrModule.forRoot({
       timeOut: 3000, // Time to close the toaster (in milliseconds)
       positionClass: 'toast-top-right', // Toast position
