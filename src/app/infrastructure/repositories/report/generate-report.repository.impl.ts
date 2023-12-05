@@ -11,7 +11,7 @@ export class GenerateReportRepositoryImpl implements GenerateReportRepository {
 
   constructor(private generateReportService: GenerateReportService) { }
 
-  getReportPdf(fechaInicio: string, fechaFin: string): Observable<any> {
-    return this.generateReportService.getReportPdf(fechaInicio, fechaFin);
+  getReportPdf(idCustomer?:number,fechaInicio?: string, fechaFin?: string): Observable<any> {
+    return this.generateReportService.getReportPdf(idCustomer,fechaInicio, fechaFin);
   }
 }

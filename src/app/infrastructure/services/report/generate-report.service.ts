@@ -10,10 +10,17 @@ export class GenerateReportService {
 
   constructor(private http: HttpClient) { }
 
-  getReportPdf(fechaInicio: string, fechaFin: string): any {
+  getReportPdf(idCustomer?: number, fechaInicio?: string, fechaFin?: string): any {
     const httpOptions = {
       responseType: 'arraybuffer' as 'json'
     };
-    return this.http.get<any>(`${this.apiUrl}/pdf?fechaInicio=${fechaInicio}&fechaFin=${fechaFin}`, httpOptions);
+
+    let url = `${this.apiUrl}/pdf?`
+    if (idCustomer) {
+      url = url + `idCustomer=${idCustomer}`;
+    } else if ((fechaInicio !== null || fechaInicio == undefined) && (fechaFin !== null || fechaFin == undefined)) {
+      url = url + `fechaInicio=${fechaInicio}&fechaFin=${fechaFin}`;
+    }
+    return this.http.get<any>(url, httpOptions);
   }
 }
