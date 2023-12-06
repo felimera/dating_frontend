@@ -17,7 +17,9 @@ export class GenerateReportComponent implements OnInit {
   datePipe = new DatePipe('en-US');
 
   nameCustomerValue: string = '';
+  messageValue: string = '';
   isEnablePrintButtonValue: boolean = true;
+  isReturnData: boolean = true;
 
   fillNameCustomerDTO: CustomerDTO | any;
 
@@ -48,14 +50,19 @@ export class GenerateReportComponent implements OnInit {
 
   onSearchCustomerParameter(): void {
     this.customerService
-      .getAnyCustomerWithQueryParameters(undefined, this.nameCustomerValue, undefined)
+      .getConsultCustomerInAppointmentForVariousParameters(this.nameCustomerValue)
       .subscribe({
         next: (res: Customer[]) => {
           if (res) {
-            this.customers = res
+            this.customers = res;
+            this.isReturnData = true;
           }
         },
-        error: res => console.log(res.error)
+        error: res => {
+          this.isReturnData = false;
+          this.messageValue = res.error.message;
+          console.log(res.error.message);
+        }
       })
   }
 
