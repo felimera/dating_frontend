@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { DateAdapter } from '@angular/material/core';
 import { Customer } from 'src/app/core/models/customer.model';
 import { CustomerDTO } from 'src/app/infrastructure/dto/customer.dto';
 import { CustomerService } from 'src/app/infrastructure/services/customer.service';
@@ -11,11 +12,12 @@ import { GenerateReportService } from 'src/app/infrastructure/services/report/ge
   templateUrl: './generate-report.component.html',
   styleUrls: ['./generate-report.component.css']
 })
-export class GenerateReportComponent {
+export class GenerateReportComponent implements OnInit {
 
   datePipe = new DatePipe('en-US');
 
   nameCustomerValue: string = '';
+  isEnablePrintButtonValue: boolean = true;
 
   fillNameCustomerDTO: CustomerDTO | any;
 
@@ -27,9 +29,22 @@ export class GenerateReportComponent {
   });
 
   constructor(
+    private dateAdapter: DateAdapter<Date>,
     private customerService: CustomerService,
     private generateReportService: GenerateReportService
-  ) { }
+  ) {
+    this.dateAdapter.setLocale('Es');
+  }
+
+  ngOnInit(): void {
+
+    this.dateRange.valueChanges.subscribe((change) => {
+      if (change.start !== null && change.end !== null) {
+        this.isEnablePrintButtonValue = false;
+      }
+    });
+
+  }
 
   onSearchCustomerParameter(): void {
     this.customerService

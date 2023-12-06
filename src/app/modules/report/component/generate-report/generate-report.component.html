@@ -58,7 +58,8 @@
             </div>
           </mat-form-field>
 
-          <button mat-fab color="primary" aria-label="Example icon button with a menu icon" (click)="onGenerarReport()">
+          <button mat-fab color="primary" aria-label="Example icon button with a menu icon" (click)="onGenerarReport()"
+            [disabled]="isEnablePrintButtonValue">
             <mat-icon>print</mat-icon>
           </button>
 
