@@ -51,6 +51,12 @@
   margin: auto;
 }
 
+.message-not-found {
+  font-size: 16px;
+  font-weight: 400;
+  color: crimson;
+}
+
 .left {
   float: left;
 }
