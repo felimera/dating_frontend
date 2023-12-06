@@ -22,4 +22,8 @@ export class CustomerRepositoryImpl implements CustomerRepository {
   getAnyCustomerWithQueryParameters(id?: number, fillName?: string, email?: string): Observable<Customer[]> {
     return this.customerService.getAnyCustomerWithQueryParameters(id, fillName, email);
   }
+
+  getConsultCustomerInAppointmentForVariousParameters(nameCustomer: string): Observable<Customer[]> {
+    return this.customerService.getConsultCustomerInAppointmentForVariousParameters(nameCustomer);
+  }
 }

@@ -45,4 +45,10 @@ export class CustomerService {
       .get<Customer[]>(url)
       .pipe(map((apiCustomer) => apiCustomer.map(CustomerMapper.fromApiToDomain)));
   }
+
+  getConsultCustomerInAppointmentForVariousParameters(nameCustomer: string): Observable<Customer[]> {
+    return this.http
+      .get<Customer[]>(`${this.apiUrl}/anyfilter/aforementioned?nameCustomer=${nameCustomer}`)
+      .pipe(map((apiCustomer) => apiCustomer.map(CustomerMapper.fromApiToDomain)));
+  }
 }
