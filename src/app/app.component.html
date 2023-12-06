@@ -21,17 +21,28 @@
 
   <mat-sidenav [(opened)]="opened" mode="side">
     <mat-list>
-      <mat-list-item *ngIf="!validarTipoUsuario()"> <a routerLink="/home"> Home </a> </mat-list-item>
-
-      <ng-template [ngIf]="validarTipoUsuario()">
-        <mat-list-item><a routerLink="/appointment-review">Review appointments</a></mat-list-item>
-        <mat-list-item><a routerLink="/generate-report">Generate appointment reports</a></mat-list-item>
-      </ng-template>
-
-      <mat-list-item *ngIf="!isExistUser()"><a routerLink="/login">Login</a></mat-list-item>
-      <mat-list-item *ngIf="isExistUser()"><a routerLink="/user-edit">User edit</a></mat-list-item>
-      <mat-list-item *ngIf="isExistUser()"><a routerLink="/user-password">User password</a></mat-list-item>
-      <mat-list-item *ngIf="isExistUser()"><a routerLink="/home" (click)="cerrarSesion()">Sign out</a></mat-list-item>
+      <mat-list-item>
+        <button mat-button routerLink="/home"><mat-icon>home</mat-icon>Home</button>
+      </mat-list-item>
+      <mat-list-item>
+        <button mat-button routerLink="/appointment-review"><mat-icon>library_books</mat-icon>Review
+          appointments</button>
+      </mat-list-item>
+      <mat-list-item>
+        <button mat-button routerLink="/generate-report"><mat-icon>print</mat-icon>Generate appointment reports</button>
+      </mat-list-item>
+      <mat-list-item>
+        <button mat-button routerLink="/login"><mat-icon>login</mat-icon>Login</button>
+      </mat-list-item>
+      <mat-list-item>
+        <button mat-button routerLink="/user-edit"><mat-icon>manage_accounts</mat-icon>User edit</button>
+      </mat-list-item>
+      <mat-list-item>
+        <button mat-button routerLink="/user-password"><mat-icon>password</mat-icon>User password</button>
+      </mat-list-item>
+      <mat-list-item>
+        <button mat-button routerLink="/home"><mat-icon>logout</mat-icon>Sign out</button>
+      </mat-list-item>
     </mat-list>
   </mat-sidenav>
 
