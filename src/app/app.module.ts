@@ -51,6 +51,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { GenerateReportComponent } from './modules/report/component/generate-report/generate-report.component';
 
 import {MatTabsModule} from '@angular/material/tabs';
+import { SidenavComponent } from './modules/layout/sidenav/sidenav.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import {MatTabsModule} from '@angular/material/tabs';
     UserEditComponent,
     UserPasswordComponent,
     AppointmentReviewComponent,
-    GenerateReportComponent
+    GenerateReportComponent,
+    SidenavComponent
   ],
   imports: [
     BrowserModule,
