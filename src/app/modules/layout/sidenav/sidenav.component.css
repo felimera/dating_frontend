@@ -2,3 +2,42 @@
   text-align: center;
   min-height: 600px;
 }
+
+.container-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 5rem;
+  background-color: #3f51b5;
+}
+
+.container-button {
+  width: 50%;
+  text-align: left;
+}
+
+.container-button button {
+  height: 4rem;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.container-data {
+  width: 50%;
+  text-align: right;
+}
+
+.container-data p {
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-right: 10px;
+  font-style: normal;
+  font-size: 13px;
+  color: white;
+  font-weight: 400;
+}
+
+.container-data p span {
+  font-weight: 500;
+  font-size: 15px;
+}
