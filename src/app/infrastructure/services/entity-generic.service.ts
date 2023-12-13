@@ -9,13 +9,20 @@ import { EntityGeneric } from 'src/app/core/models/entity-generic.model';
 })
 export class EntityGenericService {
 
-  private apiUrl = 'http://localhost:82/api/generic';
+  private apiUrlAssi = 'http://localhost:82/api/generic';
+  private apiUrlAppus = '/api/generic';
 
   constructor(private http: HttpClient) { }
 
   getMonths(): Observable<EntityGeneric[]> {
     return this.http
-      .get<EntityGeneric[]>(`${this.apiUrl}/meses`)
+      .get<EntityGeneric[]>(`${this.apiUrlAssi}/meses`)
+      .pipe(map((entity) => entity.map(EntityGenericMapper.fromApiToDomain)));
+  }
+
+  getWorkHours(selectedDate: string): Observable<EntityGeneric[]> {
+    return this.http.
+      get<EntityGeneric[]>(`${this.apiUrlAppus}/worktime?selectedDate=${selectedDate}`)
       .pipe(map((entity) => entity.map(EntityGenericMapper.fromApiToDomain)));
   }
 }
