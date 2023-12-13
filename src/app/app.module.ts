@@ -50,7 +50,7 @@ import { FormsModule } from '@angular/forms';
 import { MatRadioModule } from '@angular/material/radio';
 import { GenerateReportComponent } from './modules/report/component/generate-report/generate-report.component';
 
-import {MatTabsModule} from '@angular/material/tabs';
+import { MatTabsModule } from '@angular/material/tabs';
 import { SidenavComponent } from './modules/layout/sidenav/sidenav.component';
 
 @NgModule({
