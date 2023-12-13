@@ -1,4 +1,5 @@
 export interface EntityGenericDTO {
   id: string,
-  value: string
+  value: string,
+  displased?:boolean
 }
