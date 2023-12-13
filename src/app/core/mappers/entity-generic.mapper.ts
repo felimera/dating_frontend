@@ -5,14 +5,16 @@ export class EntityGenericMapper {
   static fromApiToDomain(apiEntityGeneric: EntityGenericDTO): EntityGeneric {
     return {
       id: apiEntityGeneric.id,
-      value: apiEntityGeneric.value
+      value: apiEntityGeneric.value,
+      displased: apiEntityGeneric.displased
     };
   }
 
   static fromDomainToApi(domainEntityGeneric: EntityGeneric): EntityGenericDTO {
     return {
       id: domainEntityGeneric.id,
-      value: domainEntityGeneric.value
+      value: domainEntityGeneric.value,
+      displased: domainEntityGeneric.displased
     };
   }
 }
