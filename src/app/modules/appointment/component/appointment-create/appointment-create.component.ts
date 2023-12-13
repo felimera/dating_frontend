@@ -12,6 +12,8 @@ import { ToasterService } from 'src/app/infrastructure/services/generally/toaste
 import { Assignment } from 'src/app/core/models/assignment.model';
 import { CustomerService } from 'src/app/infrastructure/services/customer.service';
 import { Customer } from 'src/app/core/models/customer.model';
+import { EntityGenericDTO } from 'src/app/infrastructure/dto/entity-generic.dto';
+import { EntityGenericService } from 'src/app/infrastructure/services/entity-generic.service';
 
 @Component({
   selector: 'app-appointment-create',
@@ -20,7 +22,7 @@ import { Customer } from 'src/app/core/models/customer.model';
 })
 export class AppointmentCreateComponent implements OnInit {
 
-  selected?: Date | null;
+  selected!: Date;
   pipe = new DatePipe('en-US');
   minDate?: Date;
   maxDate?: Date;
@@ -29,6 +31,8 @@ export class AppointmentCreateComponent implements OnInit {
   emailCustomerValue: string = '';
 
   fillNameCustomerDTO: CustomerDTO | any;
+  timeValues: EntityGenericDTO[] = [];
+  timeValue: EntityGenericDTO | any;
 
   appointmentForm: FormGroup<any> | any;
 
@@ -48,7 +52,8 @@ export class AppointmentCreateComponent implements OnInit {
     private appointmentService: AppointmentService,
     private toasterService: ToasterService,
     private router: Router,
-    private customerService: CustomerService
+    private customerService: CustomerService,
+    private entityGenericService: EntityGenericService
   ) {
     this.dateAdapter.setLocale('Es');
   }
@@ -155,5 +160,78 @@ export class AppointmentCreateComponent implements OnInit {
       return this.fillNameCustomerDTO?.nombre + ' ' + this.fillNameCustomerDTO?.apellido;
     }
     return '';
+  }
+
+  dateChanged(date: any) {
+    this.appointmentForm.get('hora')!.setValue('');
+    const fechaFormateada = this.pipe.transform(date, 'yyyy-MM-dd');
+
+    this.entityGenericService
+      .getWorkHours(fechaFormateada ? fechaFormateada : '')
+      .subscribe({
+        next: (res: EntityGenericDTO[]) => {
+          this.timeValues = [];
+          if (res) {
+            res.forEach(data => this.timeValues.push({ id: data.id, value: data.value, displased: data.displased }));
+            this.validateLastArrayIfThereAreTwoServices();
+            this.validateTheActiveOnesBetweenBoxes();
+          }
+        },
+        error: res => console.log(res.error)
+      })
+  }
+
+  compareId(a: EntityGenericDTO, b: EntityGenericDTO) {
+    const nameA = a.id;
+    const nameB = b.id;
+    if (nameA < nameB) {
+      return -1;
+    }
+    if (nameA > nameB) {
+      return 1;
+    }
+
+    // names must be equal
+    return 0;
+  }
+
+  validateLastArrayIfThereAreTwoServices(): void {
+    if (this.assingments.length == 2) {
+      const indexLast = this.timeValues.length - 1;
+      const entityTempl = this.timeValues[indexLast];
+      this.timeValues = this.timeValues.filter(elem => elem.id !== entityTempl.id);
+      entityTempl.displased = true;
+      this.timeValues.push(entityTempl);
+    }
+  }
+
+  validateTheActiveOnesBetweenBoxes(): void {
+
+    const timesTempl = this.timeValues.filter(elem => elem.displased === false);
+    const indexLast = this.timeValues.length - 1;
+    console.log(indexLast)
+    timesTempl.forEach(elem => {
+      const index = this.timeValues.findIndex(data => data.id === elem.id);
+      const timesTempl = this.timeValues[index];
+      const timesNext = this.timeValues[1 + index];
+      if ((index !== indexLast) && (timesNext.displased === true) && (1 + index !== indexLast)) {
+        this.timeValues = this.timeValues.filter(elem => elem.id !== timesTempl.id);
+        timesTempl.displased = true;
+        this.timeValues.push(timesTempl);
+        this.timeValues.sort(this.compareId);
+      }
+    });
+  }
+
+  onCheckTime(data: EntityGenericDTO): void {
+    this.appointmentForm.get('hora')!.setValue(data.value);
+  }
+
+  getHoraCita(): string {
+    return this.appointmentForm.get('hora')!.value;
+  }
+
+  isValidIcon(data: EntityGenericDTO): boolean {
+    return data.value === this.appointmentForm.get('hora')!.value;
   }
 }

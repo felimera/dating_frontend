@@ -51,23 +51,40 @@
 
     <div>
       <mat-card class="demo-inline-calendar-card">
-        <mat-calendar [(selected)]="selected" [minDate]="minDate" [maxDate]="maxDate"></mat-calendar>
+        <mat-calendar [(selected)]="selected" [minDate]="minDate" [maxDate]="maxDate"
+          (selectedChange)="dateChanged($event)"></mat-calendar>
       </mat-card>
     </div>
 
     <div class="rigth-container">
       <mat-list>
         <mat-list-item>Elige la hora de la cita</mat-list-item>
-        <mat-list-item>
-          <input id="appt-time" type="time" matInput name="appt-time" formControlName="hora" />
-        </mat-list-item>
+        <mat-divider></mat-divider>
+
+        <mat-grid-list class="grid-time" cols="2" rowHeight="20px">
+          <mat-grid-tile class="grid-cell" *ngFor="let data of timeValues">
+            <button mat-button :key="data.id" (click)="onCheckTime(data)" [disabled]="data.displased"
+              [color]="isValidIcon(data)?'primary':''">
+              <mat-icon *ngIf="isValidIcon(data)">check_circle</mat-icon>
+              {{data.value}}
+            </button>
+          </mat-grid-tile>
+        </mat-grid-list>
+
         <mat-divider></mat-divider>
         <mat-list-item>Nombre : {{onFillNameCustomer()}} </mat-list-item>
         <mat-divider></mat-divider>
-        <mat-list-item>Telefono y correo : {{fillNameCustomerDTO?.telefono}} {{fillNameCustomerDTO?.correo}}
+        <mat-list-item>
+          Telefono y correo : {{fillNameCustomerDTO?.telefono}} {{fillNameCustomerDTO?.correo}}
         </mat-list-item>
         <mat-divider></mat-divider>
-        <mat-list-item>Fecha de la Cita : {{fechaCita()}}</mat-list-item>
+        <mat-list-item>
+          Fecha de la Cita : {{fechaCita()}}
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>
+          Hora de la Cita : {{getHoraCita()}}
+        </mat-list-item>
       </mat-list>
     </div>
 
