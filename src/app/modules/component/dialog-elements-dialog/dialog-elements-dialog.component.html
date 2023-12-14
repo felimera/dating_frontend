@@ -1,0 +1,9 @@
+<h1 mat-dialog-title>Información</h1>
+<div mat-dialog-content>
+  <p>Para poder acceder a los servicios que ofrece nuestra aplicación se debe iniciar sesión en nuestra aplicación.</p>
+  <p>¿Usted desea iniciar sesion o no desea hacerlo?</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onValid()" [mat-dialog-close]="data">Si, claro.</button>
+  <button mat-button (click)="onNoClick()" [mat-dialog-close]="data">No, gracias</button>
+</div>

@@ -1,0 +1,27 @@
+.form-container {
+  height: 100%;
+  width: 100%;
+  padding-top: 8rem;
+}
+
+.container {
+  background-color: rgb(230, 234, 241);
+  width: 30rem;
+  padding-left: 2rem;
+  padding-right: 3rem;
+  padding-top: 3rem;
+  padding-bottom: 2rem;
+  border-radius: 5px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+}
+
+.container mat-form-field {
+  margin-left: 8px;
+}
+
+.container button {
+  margin-top: 0.5rem;
+  margin-left: 8px;
+}

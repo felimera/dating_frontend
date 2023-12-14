@@ -1,0 +1,100 @@
+<div class="container">
+
+  <div id="title-table">
+    <h1>Appointments assigned</h1>
+  </div>
+  <div id="container-panel">
+    <div id="filter-panel">
+      <div id="filter">
+        <mat-form-field>
+          <mat-label>Meses del año</mat-label>
+          <mat-select>
+            <mat-option *ngFor="let elem of entityGenericMonths" [value]="elem.id"
+              (click)="onFilterMonth(elem.id)">{{elem.value}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div id="search">
+        <mat-form-field>
+          <mat-label>Nombre del cliente</mat-label>
+          <input matInput type="text" [(ngModel)]="nameCustomerValue">
+          <button matSuffix mat-icon-button aria-label="Clear" (click)="nameCustomerValue=''">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Tipo de registro</mat-label>
+          <mat-select [(ngModel)]="validValue">
+            <mat-option *ngFor="let elem of entityGenericTypes" [value]="elem.id">{{elem.value}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <button mat-mini-fab color="primary" aria-label="Example icon button with a filter list icon"
+          (click)="onSearchData()">
+          <mat-icon>search</mat-icon>
+        </button>
+        <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon" routerLink="/home">
+          <mat-icon>save</mat-icon>
+        </button>
+      </div>
+    </div>
+    <mat-accordion *ngFor="let item of dataSource">
+      <div id="editing-panel">
+        <div id="button">
+          <button id="button-edit" mat-mini-fab aria-label="Example icon button with a menu icon"
+            (click)="onEditarAppointment(item)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button id="button-delete" mat-mini-fab color="warn" aria-label="Example icon button with a menu icon" (click)="onDeleteAppointment(item)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+      <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+
+        <mat-expansion-panel-header>
+          <div class="paragraph"><span>{{item.fecha}}</span></div>
+          <div class="paragraph">Precio total <span>{{item.precioTotal}}</span></div>
+          <div class="paragraph">Fillname <span>{{item.fillNameCustomer}}</span></div>
+        </mat-expansion-panel-header>
+
+        <table mat-table class="mat-elevation-z8" [dataSource]="item.contentTableList">
+
+          <ng-container matColumnDef="name">
+            <th class="text-center" mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell class="text-justify" *matCellDef="let element"> {{element.nombre}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="description">
+            <th class="text-center" mat-header-cell *matHeaderCellDef> Description </th>
+            <td mat-cell class="text-justify" *matCellDef="let element"> {{element.descripcion}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="price">
+            <th class="text-center" mat-header-cell *matHeaderCellDef> Price </th>
+            <td mat-cell class="text-rigth" *matCellDef="let element"> {{element.precio}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="symbol">
+            <th class="text-center" mat-header-cell *matHeaderCellDef> Symbol </th>
+            <td mat-cell class="text-rigth" *matCellDef="let element">
+              <div class="container-button">
+                <button mat-mini-fab color="primary" aria-label="Example icon button with a plus one icon">
+                  <mat-icon>change_circle</mat-icon>
+                </button>
+                <button mat-mini-fab color="accent" aria-label="Example icon button with a plus one icon" (click)="onRemoveAssignment(item,element.idAssignment)">
+                  <mat-icon>cancel</mat-icon>
+                </button>
+              </div>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+</div>

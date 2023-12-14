@@ -1,0 +1,123 @@
+<div id="container-client" *ngIf="isRolAdmin()">
+  <h2>Informacion del cliente</h2>
+  <div class="row-panel">
+    <div class="panel-search">
+      <mat-form-field>
+        <mat-label>Identificacion del cliente</mat-label>
+        <input matInput type="text" [(ngModel)]="idCustomerValue">
+        <button matSuffix mat-icon-button aria-label="Clear" (click)="idCustomerValue=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Nombre del cliente</mat-label>
+        <input matInput type="text" [(ngModel)]="nameCustomerValue">
+        <button matSuffix mat-icon-button aria-label="Clear" (click)="nameCustomerValue=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Correo del cliente</mat-label>
+        <input matInput type="text" [(ngModel)]="emailCustomerValue">
+        <button matSuffix mat-icon-button aria-label="Clear" (click)="emailCustomerValue=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+      <button mat-fab extended color="primary" (click)="onSearchCustomerParameter()" [disabled]="isEnableBottoSerach()">
+        <mat-icon>search</mat-icon>
+        Consultar
+      </button>
+    </div>
+
+    <div class="row-panel panel-search">
+
+      <div class="left-panel">
+        <div class="column-container">
+          <mat-radio-group aria-labelledby="example-radio-group-label" [(ngModel)]="fillNameCustomerDTO"
+            *ngFor="let elem of customers">
+            <mat-radio-button class="radio-button" [value]="elem">{{elem.nombre +' '+elem.apellido}}</mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </div>
+
+      <div class="right-panel">
+        <p>Nombre cliente :<span>{{onFillNameCustomer()}}</span></p>
+      </div>
+    </div>
+  </div>
+</div>
+<form [formGroup]="appointmentForm">
+  <div class="container-row">
+
+    <div>
+      <mat-card class="demo-inline-calendar-card">
+        <mat-calendar [(selected)]="selected" [minDate]="minDate" [maxDate]="maxDate"
+          (selectedChange)="dateChanged($event)"></mat-calendar>
+      </mat-card>
+    </div>
+
+    <div class="rigth-container">
+      <mat-list>
+        <mat-list-item>Elige la hora de la cita</mat-list-item>
+        <mat-divider></mat-divider>
+
+        <mat-grid-list class="grid-time" cols="2" rowHeight="20px">
+          <mat-grid-tile class="grid-cell" *ngFor="let data of timeValues">
+            <button mat-button :key="data.id" (click)="onCheckTime(data)" [disabled]="data.displased"
+              [color]="isValidIcon(data)?'primary':''">
+              <mat-icon *ngIf="isValidIcon(data)">check_circle</mat-icon>
+              {{data.value}}
+            </button>
+          </mat-grid-tile>
+        </mat-grid-list>
+
+        <mat-divider></mat-divider>
+        <mat-list-item>Nombre : {{onFillNameCustomer()}} </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>
+          Telefono y correo : {{fillNameCustomerDTO?.telefono}} {{fillNameCustomerDTO?.correo}}
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>
+          Fecha de la Cita : {{fechaCita()}}
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>
+          Hora de la Cita : {{getHoraCita()}}
+        </mat-list-item>
+      </mat-list>
+    </div>
+
+  </div>
+  <div class="down-container">
+    <mat-label>Servicios seleccionados</mat-label>
+  </div>
+  <div class="down-container">
+    <table mat-table [dataSource]="assingments" class="mat-elevation-z8">
+
+      <ng-container matColumnDef="nombre">
+        <th mat-header-cell *matHeaderCellDef> Nombre </th>
+        <td mat-cell *matCellDef="let row"> {{row.nombre}} </td>
+        <td mat-footer-cell *matFooterCellDef> Total </td>
+      </ng-container>
+
+      <ng-container matColumnDef="precio">
+        <th mat-header-cell *matHeaderCellDef> Cost </th>
+        <td mat-cell *matCellDef="let row"> {{row.precio | currency}} </td>
+        <td mat-footer-cell *matFooterCellDef> {{priceTotal | currency}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+    </table>
+  </div>
+  <div class="example-button-row">
+    <div id="btn-rigth">
+      <button mat-raised-button color="primary" (click)="onCreater()">Aceptar</button>
+    </div>
+    <div id="btn-left">
+      <button mat-raised-button color="warn">Cancelar</button>
+    </div>
+  </div>
+</form>

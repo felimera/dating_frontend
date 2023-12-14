@@ -1,0 +1,39 @@
+<div class="container-main">
+  <div class="container-button">
+    <button (click)="opened=!opened" mat-flat-button color="primary">
+      <mat-icon>menu</mat-icon>
+      <span>Dating proyect</span>
+    </button>
+  </div>
+  <div class="container-data">
+    <p *ngIf="isExistUser()"><span>{{customer.nombre}} {{customer.apellido}}</span></p>
+    <p *ngIf="isExistUser()">{{customer.correo}}</p>
+    <p *ngIf="isExistUser()">{{customer.rol}}</p>
+  </div>
+</div>
+
+<mat-drawer-container autosize>
+  <mat-drawer #drawer [(opened)]="opened" mode="side">
+    <mat-nav-list>
+      <mat-list-item *ngFor="let elem of navBarDatas">
+        <button mat-button [routerLink]="elem.url">
+          <mat-icon>{{elem.icon}}</mat-icon>
+          <span>{{elem.label}}</span>
+        </button>
+      </mat-list-item>
+      <mat-list-item *ngIf="!isExistUser()">
+        <button mat-button routerLink="/login"><mat-icon>login</mat-icon>Login</button>
+      </mat-list-item>
+      <mat-list-item *ngIf="isExistUser()">
+        <button mat-button (click)="cerrarSesion()"><mat-icon>logout</mat-icon>Sign out</button>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-drawer>
+
+  <mat-drawer-content>
+    <div class="container">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-drawer-content>
+
+</mat-drawer-container>

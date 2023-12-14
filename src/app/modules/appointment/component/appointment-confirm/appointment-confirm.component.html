@@ -1,0 +1,77 @@
+<div class="container">
+
+  <div id="message" *ngIf="!isExitData() ; else loggedOut">
+    <p>Lo sentimos, pero no tiene citas confirmadas con nosotros. Por favor <span>registre una cita</span> para
+      visulizar esta funcion.</p>
+    <div>
+      <button mat-raised-button color="accent" (click)="onReturnHome()">Return home</button>
+    </div>
+  </div>
+
+  <ng-template #loggedOut>
+    <div id="title-table">
+      <h1>Appointments assigned</h1>
+    </div>
+    <div>
+      <mat-accordion id="container-panel" *ngFor="let item of dataSource">
+        <div id="edit-button">
+          <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon"
+            (click)="onEditarAppointment(item)">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </div>
+        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+
+          <mat-expansion-panel-header>
+            <div><span>{{item.fecha}}</span></div>
+            <div>Precio total <span>{{item.precioTotal}}</span></div>
+          </mat-expansion-panel-header>
+
+          <!-- <table mat-table [dataSource]="dataSource" class="mat-elevation-z8"> -->
+          <table mat-table class="mat-elevation-z8" [dataSource]="item.contentTableList">
+
+            <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+              <th class="text-center" mat-header-cell *matHeaderCellDef> Name </th>
+              <td mat-cell class="text-justify" *matCellDef="let element"> {{element.nombre}} </td>
+            </ng-container>
+
+            <!-- Description Column -->
+            <ng-container matColumnDef="description">
+              <th class="text-center" mat-header-cell *matHeaderCellDef> Description </th>
+              <td mat-cell class="text-justify" *matCellDef="let element"> {{element.descripcion}} </td>
+            </ng-container>
+
+            <!-- Price Column -->
+            <ng-container matColumnDef="price">
+              <th class="text-center" mat-header-cell *matHeaderCellDef> Price </th>
+              <td mat-cell class="text-rigth" *matCellDef="let element"> {{element.precio}} </td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="symbol">
+              <th class="text-center" mat-header-cell *matHeaderCellDef> Symbol </th>
+              <td mat-cell class="text-rigth" *matCellDef="let element">
+                <div class="container-button">
+                  <button mat-mini-fab color="primary" aria-label="Example icon button with a plus one icon">
+                    <mat-icon>change_circle</mat-icon>
+                  </button>
+                  <button *ngIf="isMoreThanTwoElements(item.contentTableList)" mat-mini-fab color="accent" aria-label="Example icon button with a plus one icon" (click)="onRemoveAssignment(element.idAssignment,item.fechaSinFor)">
+                    <mat-icon>cancel</mat-icon>
+                  </button>
+                </div>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </ng-template>
+</div>

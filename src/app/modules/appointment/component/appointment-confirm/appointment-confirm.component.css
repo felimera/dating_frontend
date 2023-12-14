@@ -1,0 +1,89 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  display: grid;
+  place-items: center;
+  width: 96%;
+  padding: 15px;
+}
+
+#message {
+  width: 100%;
+}
+
+#message p span {
+  font-weight: bold;
+}
+
+#message div {
+  text-align: center;
+  height: auto;
+}
+
+#title-table {
+  border-radius: 5px;
+  box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12);
+  width: 100%;
+  height: 3rem;
+  text-align: center;
+  display: inline-table;
+  margin-bottom: 10px;
+}
+
+#title-table h1 {
+  display: table-cell;
+  vertical-align: middle;
+  font-weight: bold;
+}
+
+#container-panel {
+  padding-bottom: 50px;
+  border: 1px white solid;
+}
+
+#edit-button {
+  text-align: right;
+  padding-bottom: 5px;
+  padding-right: 10px;
+}
+
+table {
+  width: 100%;
+}
+
+mat-expansion-panel-header div {
+  text-align: center;
+  display: inline-table;
+  padding-left: 20px;
+}
+
+mat-expansion-panel-header div span {
+  font-weight: bold;
+}
+
+.text-justify {
+  text-align: justify;
+}
+
+.text-rigth {
+  text-align: right;
+  width: 8rem;
+}
+
+.text-center {
+  text-align: center;
+  font-weight: bold;
+}
+
+.container-button {
+  display: table-cell;
+  display: grid;
+  display: inline-table;
+}
+
+.container-button button {
+  margin-left: .4rem;
+}
